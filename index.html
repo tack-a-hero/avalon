@@ -27,7 +27,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:640px;margin:0 auto;padding:0 20px 120px}
-
+​
 /* ---------- header ---------- */
 .appbar{
   position:sticky;top:0;z-index:60;
@@ -45,13 +45,13 @@ body{
   display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0;
 }
 .icon-btn:active{transform:scale(.94)}
-
+​
 /* ---------- screens ---------- */
 .screen{display:none;animation:fade .28s ease}
 .screen.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 #flash{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0;transition:opacity .35s}
-
+​
 /* ---------- primitives ---------- */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:16px}
 .card-t{font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;margin-bottom:14px}
@@ -72,7 +72,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .btn-full{width:100%}
 .btn-row{display:flex;gap:10px}
 .btn-row .btn{flex:1}
-
+​
 .note{
   border-left:2px solid var(--line);padding:2px 0 2px 12px;
   font-size:.82rem;color:var(--muted);line-height:1.7;margin:12px 0;
@@ -91,21 +91,21 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .tag-gold{color:var(--gold);background:var(--gold-soft);border-color:rgba(227,184,114,.28)}
 .tag-mute{color:var(--faint)}
 .c-good{color:var(--good)}.c-evil{color:var(--evil)}.c-gold{color:var(--gold)}.c-mute{color:var(--muted)}
-
+​
 /* ---------- hero ---------- */
 .hero{padding:32px 0 8px;text-align:center}
 .hero-mark{width:64px;height:64px;margin:0 auto 16px;display:block}
 .hero h1{font-size:1.6rem;font-weight:700;letter-spacing:.02em;margin-bottom:6px}
 .hero p{font-size:.85rem;color:var(--muted)}
 .hero-meta{margin-top:14px;font-size:.75rem;color:var(--faint);letter-spacing:.06em}
-
+​
 /* ---------- 3行サマリー ---------- */
 .sum{display:grid;gap:10px;margin-bottom:16px}
 .sum-row{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .sum-n{width:22px;height:22px;border-radius:50%;background:var(--gold-soft);color:var(--gold);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .sum-b{font-size:.85rem;line-height:1.65}
 .sum-b b{font-weight:700}
-
+​
 /* ---------- setup ---------- */
 .steps-label{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--faint);margin-bottom:12px}
 .steps-label i{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.65rem}
@@ -137,7 +137,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .rcbtn{position:absolute;top:0;right:0;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:0;padding:0;margin:0;color:var(--faint);opacity:.6;cursor:pointer;border-radius:10px;z-index:2}
 .rcbtn .ic{width:15px;height:15px}
 .rcbtn:active{background:rgba(255,255,255,.08);opacity:1}
-
+​
 /* ---------- sticky CTA ---------- */
 .cta-bar{
   position:fixed;left:0;right:0;bottom:0;z-index:70;
@@ -152,7 +152,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
 }
 .fab span{font-size:.5rem;color:var(--faint);letter-spacing:.06em}
-
+​
 /* ---------- help sheet ---------- */
 .sheet-ov{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s}
 .sheet-ov.open{opacity:1;pointer-events:auto}
@@ -176,13 +176,13 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .seg button.on{background:var(--raised);color:var(--text)}
 .sheet-body{flex:1;overflow-y:auto;padding:16px 20px calc(28px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
 .hp{display:none}.hp.on{display:block}
-
+​
 .flow-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
 .flow-item:last-child{border-bottom:none}
 .flow-n{width:24px;height:24px;border-radius:50%;background:var(--gold-soft);color:var(--gold);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .flow-b b{display:block;font-size:.9rem;margin-bottom:3px}
 .flow-b p{font-size:.82rem;color:var(--muted);line-height:1.7}
-
+​
 .acc{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden;background:var(--surface)}
 .acc-h{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;min-height:56px}
 .acc-ic{font-size:1.25rem;width:26px;text-align:center;flex-shrink:0}
@@ -194,13 +194,13 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .acc-b.open{max-height:700px;padding:0 16px 16px}
 .acc-b .d{font-size:.84rem;line-height:1.8;color:var(--muted);margin-bottom:8px}
 .acc-b .g{font-size:.84rem;line-height:1.8}
-
+​
 .tbl{width:100%;border-collapse:collapse;font-size:.82rem}
 .tbl th{text-align:left;font-size:.7rem;letter-spacing:.06em;color:var(--faint);font-weight:700;padding:10px 8px;border-bottom:1px solid var(--line)}
 .tbl td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
 .tbl tr:last-child td{border-bottom:none}
 .tbl .num{font-weight:700;white-space:nowrap}
-
+​
 /* ---------- role reveal ---------- */
 .pass{
   border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
@@ -227,7 +227,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .progress-dots{display:flex;gap:5px;justify-content:center;margin-bottom:14px}
 .pdot{width:6px;height:6px;border-radius:50%;background:var(--line)}
 .pdot.on{background:var(--gold)}
-
+​
 /* ---------- game ---------- */
 .hud{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:16px}
 .hud-top{display:flex;gap:8px;margin-bottom:16px}
@@ -250,7 +250,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .rejrow{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:14px;font-size:.7rem;color:var(--faint)}
 .rtok{width:9px;height:9px;border-radius:50%;border:1px solid var(--line)}
 .rtok.used{background:var(--evil);border-color:var(--evil)}
-
+​
 .now{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
 .now-h{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--raised)}
 .now-h b{flex:1;font-size:.92rem}
@@ -259,7 +259,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .guide{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;color:var(--muted);line-height:1.7;background:var(--raised);border-radius:8px;padding:11px 13px;margin-bottom:14px}
 .guide i{font-style:normal;flex-shrink:0}
 .guide a{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-
+​
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:8px}
 .pb{
   background:var(--raised);border:1px solid var(--line);border-radius:10px;
@@ -276,7 +276,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .pb.h-merlin{border-color:rgba(227,184,114,.6);background:var(--gold-soft)}
 .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.72rem;color:var(--muted);margin-bottom:10px;padding:10px 12px;background:var(--raised);border-radius:8px}
 .legend i{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
-
+​
 .turn{text-align:center;padding:30px 18px;background:var(--raised);border-radius:10px}
 .turn small{font-size:.75rem;color:var(--faint);letter-spacing:.06em}
 .turn .nm{font-size:1.35rem;font-weight:700;margin:10px 0 6px}
@@ -296,7 +296,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .mini-role .i{font-size:1.3rem}
 .mini-role b{font-size:.88rem;display:block}
 .mini-role small{font-size:.74rem;color:var(--muted);line-height:1.6;display:block;margin-top:2px}
-
+​
 .vlist{display:flex;flex-direction:column;gap:6px}
 .vrow{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:8px;background:var(--raised);border:1px solid var(--line);font-size:.85rem}
 .vrow.y{border-color:rgba(106,168,238,.3)}
@@ -305,7 +305,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .tally div{flex:1;text-align:center;padding:14px;border-radius:10px;background:var(--raised);border:1px solid var(--line)}
 .tally b{display:block;font-size:1.6rem;font-weight:700;line-height:1.2}
 .tally small{font-size:.72rem;color:var(--faint)}
-
+​
 .stone{border:1px solid var(--line);border-radius:var(--r);background:var(--raised);padding:34px 20px;text-align:center;cursor:pointer}
 .stone .ic{font-size:2.2rem;margin-bottom:10px}
 .stone b{font-size:.95rem;display:block;margin-bottom:4px}
@@ -320,11 +320,11 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .log{max-height:132px;overflow-y:auto;font-size:.76rem;color:var(--muted);line-height:1.9}
 .log div{padding:4px 0;border-bottom:1px solid var(--line)}
 .log div:last-child{border-bottom:none}
-
+​
 .end-ic{font-size:3rem;text-align:center;margin-bottom:8px}
 .end-t{font-size:1.55rem;font-weight:700;text-align:center}
 .end-r{font-size:.85rem;color:var(--muted);text-align:center;margin-top:6px;margin-bottom:22px}
-
+​
 .modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center;padding:24px}
 .modal-ov.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;max-width:400px;width:100%;text-align:center}
@@ -353,9 +353,9 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="3.9"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
 <symbol id="i-stone" viewBox="0 0 24 24"><path d="M6.6 3.9h10.8l1.6 3.4v12.8H5V7.3l1.6-3.4Z"/><path d="M8.4 11h7.2M8.4 14.6h4.6"/></symbol>
 </defs></svg>
-
+​
 <div id="flash"></div>
-
+​
 <header class="appbar">
   <div class="appbar-in">
     <button class="icon-btn backbtn" id="backbtn" onclick="goBack()" disabled aria-label="一つ戻る">←</button>
@@ -370,12 +370,22 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
       </div>
     </div>
     <button class="icon-btn" id="mute" onclick="toggleMute()" aria-label="音量"><svg class="ic" aria-hidden="true"><use href="#i-sound"/></svg></button>
-    <button class="icon-btn" onclick="openHelp('flow')" aria-label="ルールを見る" style="color:var(--gold)">?</button>
+    <button class="icon-btn" onclick="openHelp('flow')" id="header-help" aria-label="ルールを見る" style="color:var(--gold)"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg><span>ルール</span></button>
   </div>
 </header>
-
+​
+<p id="save-notice" class="save-notice" role="status" hidden></p>
 <main class="wrap">
-
+<section id="screen-resume" class="screen">
+  <div class="hero"><div class="hero-meta">WELCOME BACK</div><h1>おかえりなさい</h1><p>保存されたゲームがあります。</p></div>
+  <div class="card resume-card">
+    <h2>続きから再開</h2><p id="resume-summary"></p>
+    <p class="note">役職や投票内容はここには表示しません。<br>自分の端末であることを確認して再開してください。</p>
+    <button class="btn btn-primary btn-full" id="resume-btn" onclick="continueSavedGame()">続きから再開する</button>
+    <button class="btn btn-ghost btn-full" style="margin-top:12px" onclick="discardSavedGame()">保存を消して新しく始める</button>
+  </div>
+</section>
+​
 <!-- ============ TOP ============ -->
 <section id="screen-top" class="screen active">
   <div class="hero">
@@ -386,9 +396,9 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     </svg>
     <h1>AVALON</h1>
     <p>スマホ1台を回すだけ。カード配りも進行も、すべてこのアプリが案内します。</p>
-    <div class="hero-meta">5〜10人　·　30〜60分　·　正体隠匿ゲーム</div>
+    <div class="hero-meta">5〜10人　·　30〜60分　·　正体隠匿ゲーム</div><p class="save-info">進行状況はこのブラウザに自動保存されます。</p>
   </div>
-
+​
   <div class="sec">
     <div class="steps-label"><i>i</i>30秒でわかるルール</div>
     <div class="sum">
@@ -397,9 +407,9 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
       <div class="sum-row"><div class="sum-n">3</div><div class="sum-b">選ばれた人が成功／失敗を秘密で出す。<b>先に3勝した陣営が勝利</b>（最後に暗殺あり）。</div></div>
     </div>
     <button class="btn btn-ghost btn-full" onclick="openHelp('flow')"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg> くわしいルールと役職を見る</button>
-    <div class="note" style="margin-top:14px">この「?」ボタンはゲーム中いつでも右上に出ています。困ったらすぐ開けます。</div>
+    <div class="note" style="margin-top:14px">「ルール」から、進め方と役職をいつでも確認できます。ゲーム中は画面下のボタンを使ってください。</div>
   </div>
-
+​
   <div class="sec">
     <div class="steps-label"><i>1</i>人数をえらぶ</div>
     <div class="card">
@@ -413,12 +423,12 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
       </div>
     </div>
   </div>
-
+​
   <div class="sec" id="sec-names" style="display:none">
     <div class="steps-label"><i>2</i>名前を入れる</div>
     <div class="card"><div id="pinputs"></div></div>
   </div>
-
+​
   <div class="sec" id="sec-roles" style="display:none">
     <div class="steps-label"><i>3</i>使う役職をきめる</div>
     <div class="card">
@@ -432,7 +442,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     </div>
   </div>
 </section>
-
+​
 <!-- ============ ROLE REVEAL ============ -->
 <section id="screen-role" class="screen">
   <div class="sec" style="margin-top:20px">
@@ -455,7 +465,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     </div>
   </div>
 </section>
-
+​
 <!-- ============ GAME ============ -->
 <section id="screen-game" class="screen">
   <div class="hud" style="margin-top:20px">
@@ -468,31 +478,31 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     <div class="rejrow"><span>連続否決</span><span id="rtoks" style="display:flex;gap:5px"></span><span id="rejtxt">0/5</span></div>
     <div class="cast" id="cast"></div>
   </div>
-
+​
   <div class="now">
     <div class="now-h"><b id="now-title"></b><span class="now-step" id="now-step"></span></div>
     <div class="now-b" id="now-body"></div>
   </div>
-
+​
   <div class="card">
     <div class="card-t">プレイヤー<span class="card-h">右上の目印で役職確認</span></div>
     <div id="legend-wrap"></div>
     <div class="pgrid" id="pgrid"></div>
   </div>
-
+​
   <details class="dcard">
     <summary>これまでの記録</summary>
     <div class="log" id="log"></div>
   </details>
 </section>
-
+​
 <!-- ============ END ============ -->
 <section id="screen-end" class="screen">
   <div id="end-body" style="margin-top:24px"></div>
 </section>
-
+​
 </main>
-
+​
 <!-- sticky CTA -->
 <div class="cta-bar" id="cta" style="display:none">
   <div class="cta-in">
@@ -500,7 +510,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     <button class="btn btn-primary" id="cta-btn"></button>
   </div>
 </div>
-
+​
 <!-- game dock -->
 <div class="gdock" id="gdock" style="display:none">
   <div class="gdock-in">
@@ -509,7 +519,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     <button onclick="openHelp('flow')"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg> ルール</button>
   </div>
 </div>
-
+​
 <!-- role check sheet -->
 <div class="sheet-ov" id="rc-ov" onclick="closeRC()"></div>
 <div class="sheet" id="rc-sheet" role="dialog" aria-label="役職の確認">
@@ -519,7 +529,7 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
   </div>
   <div class="sheet-body"><div class="hp on" id="rc-body"></div></div>
 </div>
-
+​
 <!-- help sheet -->
 <div class="sheet-ov" id="sheet-ov" onclick="closeHelp()"></div>
 <div class="sheet" id="sheet" role="dialog" aria-label="ルールと役職">
@@ -540,9 +550,9 @@ h2.h{font-size:1.05rem;font-weight:700;margin-bottom:4px}
     <div class="hp" id="hp-rules"></div>
   </div>
 </div>
-
+​
 <div class="modal-ov" id="modal-ov"><div class="modal"><p id="modal-msg"></p><button class="btn btn-primary" onclick="closeModal()">OK</button></div></div>
-
+​
 <script>
 /* ================= sound ================= */
 let ac=null,muted=false;
@@ -561,7 +571,7 @@ const sfx={
 };
 function toggleMute(){muted=!muted;document.getElementById('mute').innerHTML=muted?'<svg class="ic" aria-hidden="true"><use href="#i-mute"/></svg>':'<svg class="ic" aria-hidden="true"><use href="#i-sound"/></svg>';document.getElementById('mute').classList.toggle('off',muted)}
 function flash(c,d){const e=document.getElementById('flash');e.style.background=c;e.style.opacity='.3';setTimeout(()=>e.style.opacity='0',d||600)}
-
+​
 /* ================= data ================= */
 const CFG={5:{evil:2,q:[2,3,2,3,3]},6:{evil:2,q:[2,3,4,3,4]},7:{evil:3,q:[2,3,3,4,4]},8:{evil:3,q:[3,4,4,5,5]},9:{evil:3,q:[3,4,4,5,5]},10:{evil:4,q:[3,4,4,5,5]}};
 const NEED2=[7,8,9,10];
@@ -626,14 +636,14 @@ const CASTNOTE={
 const FLAVOR=['騎士たちが旅立った。祈りとともに、帰還を待つ——','霧の中へ向かう騎士たち。影に紛れる者がいる——','剣を手に、使命を胸に。裏切りの影は消えない——','試練の地へ。友と思っていた者が、敵かもしれない——','最後のクエスト。アヴァロンの運命が、いま決まる——'];
 const SUS_Q=['騎士たちの結果が石板に刻まれていく——','果たして、裏切り者はいたのか——','真実が、いま明かされる——'];
 const SUS_A=['アサシンの刃が振り上げられた——','運命が、いま決まる——','果たして、マーリンは——'];
-
+​
 /* ================= help sheet ================= */
-function openHelp(tab){buildHelp();document.getElementById('sheet-ov').classList.add('open');document.getElementById('sheet').classList.add('open');helpTab(tab||'flow')}
-function closeHelp(){document.getElementById('sheet-ov').classList.remove('open');document.getElementById('sheet').classList.remove('open')}
+function openHelp(tab){closeRC();buildHelp();document.getElementById('sheet-ov').classList.add('open');document.getElementById('sheet').classList.add('open');helpTab(tab||'flow');syncSheets('sheet')}
+function closeHelp(){document.getElementById('sheet-ov').classList.remove('open');document.getElementById('sheet').classList.remove('open');syncSheets()}
 function helpTab(t){
   document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.hp===t));
-  document.querySelectorAll('.hp').forEach(p=>p.classList.toggle('on',p.id==='hp-'+t));
-  document.querySelector('.sheet-body').scrollTop=0;
+  document.querySelectorAll('#sheet .hp').forEach(p=>p.classList.toggle('on',p.id==='hp-'+t));
+  document.querySelector('#sheet .sheet-body').scrollTop=0;
 }
 let helpBuilt=false;
 function buildHelp(){
@@ -649,7 +659,7 @@ function buildHelp(){
    '<div class="banner gold">かんたんに言うと：<b>「クエストに悪を混ぜないように、話し合ってメンバーを決める」</b>ゲームです。</div>'+
    flow.map((f,i)=>'<div class="flow-item"><div class="flow-n">'+(i+1)+'</div><div class="flow-b"><b>'+f[0]+'</b><p>'+f[1]+'</p></div></div>').join('')+
    '<div class="note good" style="margin-top:18px">初心者へ：情報がなくても大丈夫です。「誰が誰を選んだか」「誰が否決したか」だけ見ていれば十分に楽しめます。</div>';
-
+​
   const order=['MERLIN','PERCIVAL','LOYAL','ASSASSIN','MORGANA','MORDRED','OBERON','LOYAL_EVIL'];
   document.getElementById('hp-roles').innerHTML=order.map(k=>{
    const r=ROLES[k],c=r.side==='good'?'var(--good)':'var(--evil)';
@@ -662,7 +672,7 @@ function buildHelp(){
     '<div class="note good" style="margin:10px 0 0"><b>コツ</b>　'+r.tip+'</div>'+
     '<div class="note" style="font-style:italic">'+r.flavor+'</div></div></div>';
   }).join('');
-
+​
   let cast='<table class="tbl"><tr><th>人数</th><th>おすすめ配役</th></tr>';
   for(let n=5;n<=10;n++){
    const p=PRESET[n];
@@ -673,7 +683,7 @@ function buildHelp(){
   for(let n=5;n<=10;n++) q+='<tr><td class="num">'+n+'人</td>'+CFG[n].q.map(x=>'<td>'+x+'</td>').join('')+'</tr>';
   q+='</table>';
   document.getElementById('hp-cast').innerHTML=cast+q;
-
+​
   document.getElementById('hp-rules').innerHTML=
    '<div class="banner gold"><b>Q4 失敗2枚ルール（7人以上）</b><br>第4クエストだけは失敗カードが<b>2枚以上</b>で失敗。1枚なら成功扱いです。Q5は通常どおり1枚で失敗。</div>'+
    '<div class="banner evil"><b>連続否決5回ルール</b><br>チーム提案が5回連続で否決されると、その時点で<b>悪の陣営の勝利</b>。議論が止まったときの安全弁です。</div>'+
@@ -685,7 +695,7 @@ function buildHelp(){
    '<div class="note"><b>Q. 自分の役職を忘れた</b><br>自分の番（投票・クエスト）の画面に必ず表示されます。</div>';
 }
 function accToggle(k){const b=document.getElementById('ab-'+k),a=document.getElementById('ar-'+k);b.classList.toggle('open');a.style.transform=b.classList.contains('open')?'rotate(180deg)':''}
-
+​
 /* ================= setup ================= */
 let G={},selCount=0,opt={PERCIVAL:false,MORGANA:false,MORDRED:false,OBERON:false};
 function selectCount(n,btn){
@@ -733,7 +743,7 @@ function showCTA(label,fn){
   bar.style.display='block';btn.textContent=label;btn.disabled=false;btn.onclick=fn;
 }
 function hideCTA(){document.getElementById('cta').style.display='none'}
-
+​
 function startGame(){
   const c=CFG[selCount],names=[];
   for(let i=0;i<selCount;i++) names.push(document.getElementById('pi'+i).value.trim()||('P'+(i+1)));
@@ -749,7 +759,7 @@ function startGame(){
      good:0,evil:0,phase:'reveal',team:[],votes:{},qvotes:{},results:[],log:[],rev:0};
   hideCTA();showScreen('role');handover(0);
 }
-
+​
 /* ================= role reveal ================= */
 let flipped=false;
 function handover(i){
@@ -817,7 +827,7 @@ function buildBack(p){
    '<div class="infobox"><span class="lbl">目的</span>'+r.goal+'</div>'+
    '<div class="infobox"><span class="lbl">初心者へのコツ</span><span class="c-mute">'+r.tip+'</span></div>';
 }
-
+​
 /* ================= main ================= */
 function startMain(){
   showScreen('game');
@@ -896,7 +906,7 @@ function setPhase(ph){
   if(ph==='quest')questIntro();
   if(ph==='assassin')assassinPhase();
 }
-
+​
 /* --- select --- */
 function pClick(id){
   if(G.phase!=='select'){openRC(id);return}
@@ -929,7 +939,7 @@ function confirmTeam(){
   log('Q'+(G.qi+1)+'：'+G.players[G.leader].name+' が '+G.team.map(i=>G.players[i].name).join('、')+' を指名');
   setPhase('vote');
 }
-
+​
 /* --- vote --- */
 let voteIdx=0;
 function voteTurn(){
@@ -1021,7 +1031,7 @@ function rejectView(){
    '<div class="banner">次のリーダーは <b>'+escapeHTML(G.players[G.leader].name)+'</b> さんです。</div>'+
    '<button class="btn btn-primary btn-full" onclick="setPhase(\'select\')">チーム選択へ →</button>');
 }
-
+​
 /* --- quest --- */
 let qIdx=0,qOrder=[];
 function startQuest(){log('Q'+(G.qi+1)+'：チーム承認');qOrder=[...G.team];qIdx=0;G.qvotes={};setPhase('quest')}
@@ -1145,7 +1155,7 @@ function questResultView(){
    '<div class="banner">善 <b class="c-good">'+G.good+'</b> ／ 悪 <b class="c-evil">'+G.evil+'</b>（先に3勝で決着）</div>'+next);
 }
 function nextQuest(){G.team=[];renderAll();setPhase('select')}
-
+​
 /* --- assassin --- */
 let target=null;
 function assassinPhase(){
@@ -1179,7 +1189,7 @@ function doAssassin(){
   if(t.role==='MERLIN'){log('アサシンが '+t.name+' を暗殺 → 的中。悪の勝利');sfx.lose();flash('rgba(236,124,112,1)',900);setTimeout(()=>endGame('evil','アサシンがマーリンを暗殺'),400)}
   else{log('アサシンが '+t.name+' を暗殺 → 外れ。善の勝利');sfx.win();flash('rgba(106,168,238,1)',900);setTimeout(()=>endGame('good','マーリンの暗殺を阻止'),400)}
 }
-
+​
 /* --- end --- */
 function endGame(winner,reason){
   G.winner=winner;G.reason=reason;endView();
@@ -1203,11 +1213,11 @@ function endView(){
    '<div class="btn-row" style="margin-bottom:40px"><button class="btn btn-ghost" onclick="openHelp(\'roles\')">役職を見返す</button>'+
    '<button class="btn btn-primary" onclick="resetGame()">もう一度あそぶ</button></div>';
 }
-
+​
 /* --- utils --- */
 function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-window.addEventListener('beforeunload',event=>{if(G.players&&G.phase!=='end'){event.preventDefault();event.returnValue=''}});
-
+​
+​
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');window.scrollTo(0,0);const gd=document.getElementById('gdock'),on=(id==='game');if(gd){gd.style.display=on?'block':'none';document.body.classList.toggle('gdock-on',on)}}
 function log(m){const el=document.getElementById('log');if(!el)return;G.log.push(m);el.innerHTML=G.log.slice().reverse().map(l=>'<div>'+escapeHTML(l)+'</div>').join('')}
 function showModal(m){document.getElementById('modal-msg').textContent=m;document.getElementById('modal-ov').classList.add('open')}
@@ -1222,8 +1232,8 @@ function resetGame(){
   document.getElementById('sec-roles').style.display='none';
   hideCTA();G={};HIST=[];setTodo(null,null);showScreen('top');updateBack();
 }
-
-
+​
+​
 /* ================= todo panel (always visible next steps) ================= */
 let TODOH='',RULES_OPEN=false;
 function setTodo(todo,rules){
@@ -1243,7 +1253,7 @@ function toggleRules(btn){
   else{b.setAttribute('hidden','');btn.innerHTML='このステップのルール<span>▼</span>'}
   RULES_OPEN=open;
 }
-
+​
 /* ================= one-step undo ================= */
 let HIST=[],CURV='setup',RESTORING=false,busy=false;
 function getNames(){const a=[];for(let i=0;i<selCount;i++){const e=document.getElementById('pi'+i);a.push(e?e.value:'')}return a}
@@ -1307,7 +1317,7 @@ const RENDER={
   assassin:()=>{G.phase='assassin';showScreen('game');assassinPhase()},
   end:()=>{endView()}
 };
-
+​
 /* ================= role check anytime ================= */
 let rcTarget=null;
 function roleDetailHTML(p){
@@ -1334,6 +1344,7 @@ function roleDetailHTML(p){
    '<div class="infobox"><span class="lbl">初心者へのコツ</span><span class="c-mute">'+r.tip+'</span></div></div>';
 }
 function openRCPicker(){
+  closeHelp();document.getElementById('rc-body').classList.add('on');
   if(!G.players){showModal('ゲームを開始すると役職を確認できます。');return}
   rcTarget=null;
   document.getElementById('rc-title').textContent='誰の役職を確認しますか？';
@@ -1341,9 +1352,10 @@ function openRCPicker(){
    '<div class="guide"><i><svg class="ic" aria-hidden="true"><use href="#i-person"/></svg></i><div>名前を選んだあと、本人確認をはさんでから表示します。</div></div>'+
    '<div class="pgrid">'+G.players.map(p=>'<div class="pb" onclick="openRC('+p.id+')"><div class="av"><svg class="ic" aria-hidden="true"><use href="#i-person"/></svg></div><div class="nm">'+escapeHTML(p.name)+'</div><div class="bd"></div></div>').join('')+'</div>';
   document.getElementById('rc-ov').classList.add('open');
-  document.getElementById('rc-sheet').classList.add('open');
+  document.getElementById('rc-sheet').classList.add('open');syncSheets('rc-sheet');
 }
 function openRC(id){
+  closeHelp();document.getElementById('rc-body').classList.add('on');
   if(!G.players)return;
   const p=G.players.find(x=>x.id===id);if(!p)return;
   rcTarget=id;
@@ -1355,7 +1367,7 @@ function openRC(id){
    '<button class="btn btn-primary btn-full" onclick="rcShow()">役職を表示する</button>'+
    '<button class="btn btn-ghost btn-full" style="margin-top:10px" onclick="closeRC()">やめる</button>';
   document.getElementById('rc-ov').classList.add('open');
-  document.getElementById('rc-sheet').classList.add('open');
+  document.getElementById('rc-sheet').classList.add('open');syncSheets('rc-sheet');
   const b=document.querySelector('#rc-sheet .sheet-body');if(b)b.scrollTop=0;
 }
 function rcShow(){
@@ -1370,9 +1382,9 @@ function rcShow(){
 function closeRC(){
   document.getElementById('rc-ov').classList.remove('open');
   document.getElementById('rc-sheet').classList.remove('open');
-  document.getElementById('rc-body').innerHTML='';rcTarget=null;
+  document.getElementById('rc-body').innerHTML='';rcTarget=null;syncSheets();
 }
-
+​
 /* --- demo hook (screenshot only) --- */
 function startDemo(){
   const mode=window.__DEMO;if(!mode)return;
@@ -1394,9 +1406,9 @@ function startDemo(){
 /* ===== back button / dock / todo / role-check / iPad ===== */
 .backbtn{margin-right:10px;font-size:1rem;line-height:1}
 .backbtn:disabled{opacity:.32}
-
+​
 .card-h{float:right;font-size:.7rem;font-weight:500;color:var(--faint);letter-spacing:.02em}
-
+​
 .todo-card .now-b{padding-top:2px}
 .tdl{display:flex;flex-direction:column;gap:9px}
 .tdi{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;line-height:1.65}
@@ -1409,10 +1421,10 @@ function startDemo(){
 .rul li b{color:var(--text)}
 .rulf{font-size:.76rem;color:var(--faint);margin-top:8px}
 .rulf a{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-
+​
 .nmtap{cursor:pointer}
 .nmq{font-size:.62em;opacity:.5;margin-left:3px;vertical-align:2px}
-
+​
 .gdock{position:fixed;left:0;right:0;bottom:0;z-index:60;
   background:linear-gradient(to top,rgba(18,18,26,.98) 60%,rgba(18,18,26,.86));
   border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
@@ -1421,10 +1433,10 @@ function startDemo(){
   background:var(--raised);color:var(--text);font-size:.8rem;font-weight:600;font-family:inherit;cursor:pointer}
 .gdock button:disabled{opacity:.34}
 body.gdock-on .wrap{padding-bottom:104px}
-
+​
 #rc-sheet .rcard{text-align:center}
 #rc-sheet .rcard .infobox,#rc-sheet .rcard .role-desc{text-align:left}
-
+​
 @media (min-width:700px){
   .wrap{max-width:720px}
   .appbar-in,.cta-in,.gdock-in{max-width:720px}
@@ -1455,14 +1467,14 @@ body.gdock-on .wrap{padding-bottom:104px}
 :root{--r:14px}
 body{line-height:1.55}
 .wrap{padding:0 18px 116px}
-
+​
 /* --- cards: lighter, less nesting --- */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px}
 .card-t{margin-bottom:12px;font-size:.68rem;letter-spacing:.14em}
 .card-h{float:right;font-weight:500;color:var(--faint);letter-spacing:.02em;font-size:.66rem}
 .banner{background:transparent;border-color:var(--line);padding:11px 13px;margin:10px 0;font-size:.84rem}
 .guide{background:transparent;padding:0;margin-bottom:12px;font-size:.82rem}
-
+​
 /* --- compact HUD: one quiet line + small quest pills --- */
 .hud{background:transparent;border:none;border-bottom:1px solid var(--line);border-radius:0;
   padding:2px 0 14px;margin:4px 0 14px}
@@ -1479,13 +1491,13 @@ body{line-height:1.55}
 .qb .mk{top:-4px;right:-4px;font-size:.68rem}
 .rejrow{margin-top:11px;font-size:.66rem}
 .rtok{width:7px;height:7px}
-
+​
 /* --- action card = the only focal point --- */
 .now{margin-bottom:12px;border-radius:var(--r)}
 .now-h{background:transparent;border-bottom:1px solid var(--line);padding:13px 16px}
 .now-h b{font-size:.95rem;letter-spacing:.01em}
 .now-b{padding:16px}
-
+​
 /* --- merged steps block --- */
 .steps{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
 .steps-h{font-size:.66rem;letter-spacing:.14em;color:var(--faint);text-transform:uppercase;margin-bottom:9px}
@@ -1504,7 +1516,7 @@ body{line-height:1.55}
 .rul li b{color:var(--text);font-weight:700}
 .rulf{display:flex;gap:14px;margin-top:6px;font-size:.74rem}
 .rulf a{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-
+​
 /* --- player grid: flatter tiles --- */
 .pgrid{grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:7px}
 .pb{min-height:70px;padding:10px 6px;border-radius:11px;background:rgba(255,255,255,.03)}
@@ -1514,7 +1526,7 @@ body{line-height:1.55}
 .nmq{display:none}
 .nmtap{text-decoration:underline;text-decoration-color:rgba(255,255,255,.22);text-underline-offset:3px}
 .legend{background:transparent;padding:0 0 10px;font-size:.68rem}
-
+​
 /* --- collapsible log --- */
 .dcard{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-bottom:12px;overflow:hidden}
 .dcard summary{list-style:none;cursor:pointer;padding:13px 16px;font-size:.72rem;font-weight:700;
@@ -1524,7 +1536,7 @@ body{line-height:1.55}
 .dcard[open] summary::after{content:'\25b2'}
 .dcard[open] summary{border-bottom:1px solid var(--line)}
 .dcard .log{padding:12px 16px 14px}
-
+​
 /* --- bottom dock: quiet icons --- */
 .gdock{background:linear-gradient(to top,rgba(18,18,26,.985) 55%,rgba(18,18,26,.75));padding:9px 18px calc(9px + env(safe-area-inset-bottom))}
 .gdock-in{grid-template-columns:1fr 1fr 1fr;gap:7px}
@@ -1532,7 +1544,7 @@ body{line-height:1.55}
   color:var(--muted);font-size:.76rem;font-weight:600}
 .gdock button:first-child{color:var(--text)}
 body.gdock-on .wrap{padding-bottom:96px}
-
+​
 /* --- misc calm-down --- */
 .turn{background:transparent;padding:22px 0 4px}
 .mini-role{background:rgba(255,255,255,.03)}
@@ -1594,7 +1606,7 @@ body::after{
 .sheet-ov,.rc-ov{z-index:90}
 .modal-ov{z-index:120}
 #flash{z-index:200}
-
+​
 /* ---------- iconography ---------- */
 .ic{
   width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none;
@@ -1607,7 +1619,7 @@ body::after{
 .icon-btn.off{color:var(--faint)}
 .cchip .ic{width:.95em;height:.95em;opacity:.9}
 .pb .av{display:none}
-
+​
 /* ---------- typography ---------- */
 h1{
   font-family:var(--serif);font-weight:600;
@@ -1629,7 +1641,7 @@ small,.note,.flavor{letter-spacing:.01em}
   content:'';display:block;width:52px;height:1px;margin:18px auto 0;
   background:linear-gradient(90deg,transparent,var(--gold-dp),transparent);
 }
-
+​
 /* ---------- surfaces ---------- */
 .card,.now,.hud,.dcard,.sum,.infobox,.rcard{
   background:linear-gradient(180deg,rgba(255,255,255,.032),rgba(255,255,255,.012));
@@ -1645,7 +1657,7 @@ small,.note,.flavor{letter-spacing:.01em}
 .now-h{color:var(--gold-hi)}
 .now-step{color:var(--gold-dp)}
 .card::after,.now::after{content:none}
-
+​
 /* ---------- buttons: tactile, weighted ---------- */
 .btn{
   font-weight:600;letter-spacing:.04em;border-radius:11px;
@@ -1670,7 +1682,7 @@ small,.note,.flavor{letter-spacing:.01em}
   transition:transform .12s var(--ease),background .18s;
 }
 .icon-btn:active{transform:scale(.94)}
-
+​
 /* ---------- quest track: struck medallions ---------- */
 .qb{
   border:1px solid var(--line);background:rgba(255,255,255,.025);
@@ -1683,7 +1695,7 @@ small,.note,.flavor{letter-spacing:.01em}
 .qb.ok{border-color:rgba(124,193,150,.5);background:rgba(124,193,150,.14);color:var(--ok)}
 .qb.ng{border-color:rgba(232,131,122,.5);background:rgba(232,131,122,.14);color:var(--evil)}
 .rtok{border:1px solid var(--line)}
-
+​
 /* ---------- player tiles ---------- */
 .pb{
   background:rgba(255,255,255,.022);border:1px solid var(--line);
@@ -1696,13 +1708,13 @@ small,.note,.flavor{letter-spacing:.01em}
 }
 .pb.leader{border-color:rgba(220,184,120,.4)}
 .nmtap{text-decoration-color:rgba(244,242,238,.28);text-underline-offset:3px}
-
+​
 /* ---------- cast strip ---------- */
 .cchip{
   background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
   box-shadow:0 1px 0 rgba(255,255,255,.05) inset;
 }
-
+​
 /* ---------- role card / reveal ---------- */
 .flipwrap{perspective:1400px}
 .flipin{transition:transform .78s cubic-bezier(.2,.85,.15,1)}
@@ -1713,11 +1725,11 @@ small,.note,.flavor{letter-spacing:.01em}
 }
 .face-back{background:linear-gradient(165deg,#20222f,#15171f 62%,#0f1117)}
 .role-ic{color:var(--gold-hi);opacity:.95}
-
+​
 /* ---------- collapsible rules ---------- */
 .rul-t{transition:background .18s,border-color .18s}
 .rul-t:active{transform:scale(.995)}
-
+​
 /* ---------- bottom dock ---------- */
 .gdock{
   background:linear-gradient(180deg,rgba(15,16,23,.72),rgba(11,12,18,.96));
@@ -1730,7 +1742,7 @@ small,.note,.flavor{letter-spacing:.01em}
 }
 .gdock-in button:active{transform:scale(.96)}
 .cta-bar{background:linear-gradient(180deg,rgba(15,16,23,.55),rgba(11,12,18,.96));backdrop-filter:blur(18px)}
-
+​
 /* ---------- motion: content settles in ---------- */
 @keyframes rise{from{opacity:0;transform:translateY(11px)}to{opacity:1;transform:none}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
@@ -1740,7 +1752,7 @@ small,.note,.flavor{letter-spacing:.01em}
 .screen.active>*:nth-child(3){animation-delay:.12s}
 .screen.active>*:nth-child(4){animation-delay:.17s}
 .screen.active>*:nth-child(n+5){animation-delay:.21s}
-
+​
 /* ---------- accessibility & platform polish ---------- */
 ::selection{background:rgba(220,184,120,.3);color:#fff}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:8px}
@@ -1772,5 +1784,203 @@ button{font:inherit;color:inherit}
 .turn .nm,.pass-n,.tbl td,.hud-cell b{overflow-wrap:anywhere}
 .btn-sm,.role-opt .q{min-height:44px}
 </style>
+​
+<style>
+/* One exclusive, viewport-bound dialog layer. */
+#header-help{width:auto;min-width:72px;gap:6px;font-size:.72rem;padding:0 10px;flex-shrink:0}
+#header-help .ic{width:16px;height:16px}
+.gdock-on #header-help{display:none}
+.sheet-ov{z-index:300}
+.sheet{z-index:310;left:0;right:0;bottom:0;width:100%;max-width:720px;margin:0 auto;height:86vh;height:86dvh;max-height:calc(100dvh - env(safe-area-inset-top) - 12px);transform:translateY(105%);border-radius:18px 18px 0 0;isolation:isolate}
+.sheet.open{transform:translateY(0)}
+.sheet-head{padding-top:12px;flex:0 0 auto}
+.sheet-top{gap:12px;min-height:44px}
+.sheet-top h3{margin:0;min-width:0}
+.sheet-top .icon-btn{flex:0 0 44px;width:44px;height:44px}
+.sheet-body{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+#rc-body{display:block}
+body.sheet-is-open{overflow:hidden}
+body.sheet-is-open .appbar,body.sheet-is-open .wrap,body.sheet-is-open .gdock,body.sheet-is-open .cta-bar{pointer-events:none}
+.modal-ov{z-index:400}
+#flash{z-index:450}
+.save-notice{position:relative;z-index:80;margin:12px 20px;padding:12px;border:1px solid var(--gold);border-radius:10px;background:var(--bg);font-size:.8rem}
+.save-info{font-size:.75rem!important;color:var(--muted)!important;margin-top:14px!important}
+.resume-card h2{font-size:1.15rem;margin-bottom:12px}
+.resume-card .note{margin:16px 0 24px}
+</style>
+<script>
+function syncSheets(openId){
+  const open=!!document.querySelector('.sheet.open');
+  document.body.classList.toggle('sheet-is-open',open);
+  document.querySelectorAll('.appbar,main,.gdock,.cta-bar').forEach(e=>{e.inert=open});
+  document.querySelectorAll('.sheet').forEach(e=>{e.setAttribute('aria-modal','true');e.setAttribute('aria-hidden',e.classList.contains('open')?'false':'true');e.inert=!e.classList.contains('open')});
+  if(openId){const e=document.getElementById(openId);const b=e.querySelector('.sheet-body');if(b)b.scrollTop=0;e.querySelector('.icon-btn').focus({preventScroll:true})}
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeHelp();closeRC()}});
+syncSheets();
+</script>
+<script>
+/* Same-browser local session persistence. Private screens resume at a handover gate. */
+const SESSION_KEY='avalon.session.v1';
+let pendingAction=null,awaitingResume=null,sessionRestoring=false,saveDepth=0;
+function storageNotice(message){const e=document.getElementById('save-notice');e.textContent=message;e.hidden=!message}
+function sessionSnapshot(){return {version:1,savedAt:Date.now(),v:CURV,G,selCount,opt,voteIdx,qIdx,qOrder,target,names:getNames(),history:HIST.slice(-150),rulesOpen:RULES_OPEN,muted,pending:pendingAction}}
+function saveSession(){
+  if(sessionRestoring||awaitingResume)return;
+  try{
+    if(!selCount&&!G.players){localStorage.removeItem(SESSION_KEY);return}
+    localStorage.setItem(SESSION_KEY,JSON.stringify(sessionSnapshot()));storageNotice('');
+  }catch(e){storageNotice('自動保存できません。このブラウザの保存設定をご確認ください。今はリロードせずに続けてください。')}
+}
+function validSession(s){
+  if(!s||s.version!==1||!Number.isInteger(s.selCount)||s.selCount<5||s.selCount>10||!s.opt||!s.G||!Array.isArray(s.names)||!Object.hasOwn(RENDER,s.v))return false;
+  if(s.G.players){const g=s.G;
+    if(g.n!==s.selCount||g.players.length!==g.n||!g.players.every((p,i)=>p.id===i&&typeof p.name==='string'&&ROLES[p.role]&&ROLES[p.role].side===p.side))return false;
+    if(!Number.isInteger(g.qi)||g.qi<0||g.qi>5||!Number.isInteger(g.leader)||g.leader<0||g.leader>=g.n||!Array.isArray(g.team)||!Array.isArray(g.results)||!Array.isArray(g.log)||JSON.stringify(g.qcfg)!==JSON.stringify(CFG[g.n].q))return false;
+    if(!Array.isArray(s.qOrder)||!s.qOrder.every(i=>Number.isInteger(i)&&i>=0&&i<g.n))return false;
+  }else if(s.v!=='setup')return false;
+  return true;
+}
+function restoreSessionState(s){
+  sessionRestoring=true;RESTORING=true;
+  try{
+    G=s.G;selCount=s.selCount;opt=s.opt;voteIdx=s.voteIdx||0;qIdx=s.qIdx||0;qOrder=s.qOrder||[];target=s.target??null;
+    HIST=Array.isArray(s.history)?s.history.filter(x=>{try{return typeof x==='string'&&validSession({...JSON.parse(x),version:1})}catch(e){return false}}).slice(-150):[];
+    RULES_OPEN=!!s.rulesOpen;busy=false;flipped=false;pendingAction=null;
+    if(susTimer){clearInterval(susTimer);susTimer=null}
+    closeHelp();closeRC();hideCTA();
+    rebuildSetup(s);
+    let v=s.v;
+    if(s.pending==='reveal-next'){
+      if(G.rev+1<G.n){G.rev++;v='reveal_pass'}else{G.phase='select';v='select'}
+    }else if(s.pending==='quest'){v='quest_stone'}
+    else if(s.pending==='ass'){v='assassin'}
+    if(v==='reveal_card')v='reveal_pass';
+    if(v==='vote_screen')v='vote_turn';
+    if(v==='quest_card')v='quest_turn';
+    const selectedTarget=s.target;
+    CURV=v;(RENDER[v]||RENDER.setup)(s);
+    if(v==='assassin'&&Number.isInteger(selectedTarget)&&document.getElementById('t'+selectedTarget))pickTarget(selectedTarget);
+    if(G.log)document.getElementById('log').innerHTML=G.log.slice().reverse().map(l=>'<div>'+escapeHTML(l)+'</div>').join('');
+    if(!!s.muted!==muted)toggleMute();
+    CURV=v;updateBack();
+  }finally{RESTORING=false;sessionRestoring=false}
+  saveSession();
+}
+function continueSavedGame(){
+  if(!awaitingResume)return;
+  const s=awaitingResume;awaitingResume=null;
+  try{restoreSessionState(s)}catch(e){awaitingResume=s;showScreen('resume');storageNotice('保存データから再開できませんでした。新しいゲームを始める前に保存データを確認してください。');console.error(e)}
+}
+function discardSavedGame(){
+  if(!window.confirm('保存されているゲームを消して、新しく始めますか？'))return;
+  awaitingResume=null;pendingAction=null;resetGame();storageNotice('');
+}
+function loadSession(){
+  try{
+    const raw=localStorage.getItem(SESSION_KEY);if(!raw)return;
+    const s=JSON.parse(raw);if(!validSession(s))throw new Error('invalid saved session');
+    if(!s.G.players){restoreSessionState(s);return}
+    awaitingResume=s;showScreen('resume');hideCTA();
+    const phase=s.G.phase==='end'?'終了したゲーム':s.G.phase==='reveal'?'役職の確認中':'クエスト '+Math.min(s.G.qi+1,5)+' の途中';
+    document.getElementById('resume-summary').textContent=s.G.n+'人 ・ '+phase;
+  }catch(e){storageNotice('保存データを読み込めませんでした。新しいゲームを開始すると保存データが上書きされます。')}
+}
+const sessionMutators=['selectCount','applyPreset','checkStart','startGame','handover','showCard','flipCard','nextReveal','startMain','setPhase','pClick','confirmTeam','voteTurn','voteScreen','castVote','voteResult','startQuest','doReject','questIntro','questTurn','questCard','castQuest','questStone','suspense','resolveQuest','questResultView','nextQuest','assassinPhase','pickTarget','doAssassin','endGame','goBack','resetGame','toggleRules','toggleMute'];
+for(const name of sessionMutators){
+  const fn=window[name];if(typeof fn!=='function')continue;
+  window[name]=function(...args){
+    saveDepth++;
+    if(name==='suspense')pendingAction=args[0];
+    if(name==='nextReveal')pendingAction='reveal-next';
+    if(['handover','startMain','resolveQuest','endGame','goBack','resetGame'].includes(name))pendingAction=null;
+    try{return fn.apply(this,args)}finally{
+      if(name==='resetGame'){CURV='setup';awaitingResume=null}
+      saveDepth--;if(saveDepth===0)saveSession();
+    }
+  };
+}
+document.addEventListener('input',saveSession);
+document.addEventListener('change',saveSession);
+window.addEventListener('pagehide',saveSession);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveSession()});
+loadSession();
+​
+</script>
+​
+<style>
+/* Prevent viewport overscroll without disabling ordinary scroll or pinch zoom. */
+#pgrid .pb{min-height:112px;padding:48px 5px 8px}
+.seg button{min-height:44px}
+.role-opt .q{min-width:44px}
+​
+html,body{overscroll-behavior-y:none}
+.sheet-body{overscroll-behavior-y:contain}
+.appbar-in{padding-top:calc(12px + env(safe-area-inset-top));padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));gap:8px}
+.icon-btn{min-width:44px;min-height:44px}
+.backbtn{margin-right:0}
+.brand-s{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cta-bar{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+.cta-in .btn{min-width:0;white-space:normal}
+.gdock{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+.wrap,body.gdock-on .wrap{padding-bottom:calc(130px + env(safe-area-inset-bottom));scroll-padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+html{scroll-padding-top:calc(80px + env(safe-area-inset-top));scroll-padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+@media(max-width:360px){
+  .brand-mark{display:none}
+  .brand-t{font-size:.82rem;letter-spacing:.08em}
+  .brand-s{display:none}
+  .wrap{padding-left:12px;padding-right:12px}
+  .gdock button{font-size:.72rem;letter-spacing:0;gap:4px}
+  .gdock-in{gap:5px}
+  .cta-in{gap:7px}
+  .cta-in .btn{font-size:.8rem;padding-left:8px;padding-right:8px}
+}
+@media(max-height:480px) and (orientation:landscape){
+  .appbar-in{padding-top:env(safe-area-inset-top);padding-bottom:2px}
+  .sheet{height:96vh;height:96dvh;max-height:calc(100dvh - 4px)}
+  .sheet-head{padding-top:4px}
+  .grabber{display:none}
+  .sheet-top{margin-bottom:4px}
+  .gdock{padding-top:4px;padding-bottom:calc(4px + env(safe-area-inset-bottom))}
+}
+</style>
+<script>
+/* Non-passive edge guard for browsers without full overscroll-behavior support. */
+(()=>{
+  let lastX=0,lastY=0,oneFinger=false;
+  document.addEventListener('touchstart',e=>{
+    oneFinger=e.touches.length===1;
+    if(oneFinger){lastX=e.touches[0].clientX;lastY=e.touches[0].clientY}
+  },{passive:true});
+  document.addEventListener('touchmove',e=>{
+    if(!oneFinger||e.touches.length!==1)return;
+    const x=e.touches[0].clientX,y=e.touches[0].clientY,dx=x-lastX,dy=y-lastY;
+    lastX=x;lastY=y;
+    if(Math.abs(dy)<=Math.abs(dx)||Math.abs(dy)<1)return;
+    // Never block zoom gestures or panning an already zoomed page.
+    if(window.visualViewport&&window.visualViewport.scale>1.01)return;
+    let node=e.target instanceof Element?e.target:e.target.parentElement;
+    let canScroll=false,insideSheet=false;
+    while(node&&node!==document.body&&node!==document.documentElement){
+      if(node.classList.contains('sheet'))insideSheet=true;
+      const css=getComputedStyle(node);
+      if(/auto|scroll/.test(css.overflowY)&&node.scrollHeight>node.clientHeight+1){
+        if((dy>0&&node.scrollTop>0)||(dy<0&&node.scrollTop+node.clientHeight<node.scrollHeight-1)){canScroll=true;break}
+      }
+      node=node.parentElement;
+    }
+    if(!canScroll&&!insideSheet&&!document.body.classList.contains('sheet-is-open')){
+      const root=document.scrollingElement;
+      canScroll=dy>0?root.scrollTop>0:root.scrollTop+window.innerHeight<root.scrollHeight-1;
+    }
+    if(!canScroll&&e.cancelable)e.preventDefault();
+  },{passive:false});
+  const end=()=>{oneFinger=false};
+  document.addEventListener('touchend',end,{passive:true});
+  document.addEventListener('touchcancel',end,{passive:true});
+})();
+</script>
+​
 </body>
 </html>
+​
