@@ -1031,6 +1031,8 @@ function seatRows(st){
 }
 function renderGame(st={}){
  if(!G)return;
+ const viewKey=G.quest+':'+G.phase,previous=$('#app>.wrap.game');
+ const scrollTop=previous?.dataset.viewKey===viewKey?previous.scrollTop:0;
  const sy=backTarget(),phaseLabel={ROLES:'役職確認',TEAM:'チーム編成',VOTE:'承認投票',VOTE_RESULT:'投票結果',QUEST:'探索',QUEST_RESULT:'探索結果',LADY:'湖の乙女',ASSASSIN:'暗殺'}[G.phase]||'';
  $('#app').innerHTML=`<div class="wrap game"><div class="table-top"><span class="left"><button class="bkb game-back" id="backTop" type="button" aria-label="ひとつ前に戻る" ${sy?'':'disabled'}>${ic('back')}<span>戻る</span></button><span class="brand">AVALON</span><span class="edition">THE ROUND TABLE</span></span><span class="qpill">第 ${ROMAN[Math.min(G.quest,4)]} 探索 · ${N()}人</span><button class="iconbtn" id="menuBtn" aria-label="メニュー">${ic('menu')}</button></div>
  <div class="table-main"><div class="seat-area"><section class="players" aria-label="円卓のプレイヤー">${seatRows(st)}</section></div>
@@ -1038,6 +1040,7 @@ function renderGame(st={}){
  <div class="board-area">${boardHTML()}</div>${st.below||''}</div>
  <div class="table-links"><button id="tableRules">遊び方</button><button id="tableLog">これまでの記録</button><button data-sound aria-pressed="${!muted}">${muted?'音：OFF':'音：ON'}</button></div></div>
  ${st.dock?`<div class="dock">${st.hint?`<div class="hint">${st.hint}</div>`:''}<div class="dock-in">${st.dock}</div></div>`:''}`;
+ const wrap=$('#app>.wrap.game');wrap.dataset.viewKey=viewKey;wrap.scrollTop=scrollTop;
  $('#menuBtn').onclick=menu;$('#backTop').onclick=goBack;$('#tableRules').onclick=()=>help();$('#tableLog').onclick=()=>modal(`<div class="ctr"><div class="eyebrow">Chronicle</div><h2>これまでの記録</h2></div>${G.history.length?`<table class="hist">${histRows()}</table>`:'<p class="ctr">まだ記録はありません。</p>'}<div class="acts"><button class="btn btn-primary" data-ok>閉じる</button></div>`,(b,c)=>b.querySelector('[data-ok]').onclick=()=>c(),{dismiss:true});$('[data-sound]').onclick=switchSound;syncBack();
  $$('.pl.pick').forEach(el=>{el.onclick=()=>{sfx.tap();const i=+el.dataset.p;pickHandler&&pickHandler(i);document.querySelector(`.pl.pick[data-p="${i}"]`)?.focus({preventScroll:true})};el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}}});st.setup&&st.setup();
 }
@@ -1309,6 +1312,7 @@ function clampRoles(){
  L.roles=L.roles.filter(r=>{if(r==='PERCIVAL')return true;if(ev<cap){ev++;return true}return false});
 }
 function renderLobby(){
+ const scrollTop=$('#app>.wrap.lobby')?.scrollTop||0;
  const n=L.names.length;
  if(!L.custom)L.roles=PRESET[n].slice();
  if(!L.ladyCustom)L.lady=n>=7;
@@ -1332,6 +1336,7 @@ function renderLobby(){
    <div class="optrow"><div><div class="t">${ic('vote')} 投票方法</div><div class="d">${L.vote==='open'?'全員で一斉に指を出し、結果をまとめて入力':'1人ずつ端末を回して秘密投票'}</div></div><div class="seg"><button data-vote="open" class="${L.vote==='open'?'on':''}">まとめて</button><button data-vote="secret" class="${L.vote==='secret'?'on':''}">端末を回す</button></div></div></section>
   </div><div class="lobby-foot"><button class="linkbtn" id="rules">${ic('book')} 遊び方と役職</button><button class="linkbtn" data-sound aria-pressed="${!muted}">${muted?'音：OFF':'音：ON'}</button></div>
  </div><div class="dock"><div class="dock-in"><button class="btn btn-primary btn-lg" id="start">円卓につく</button></div></div>`;
+ $('#app>.wrap.lobby').scrollTop=scrollTop;
  const ins=$$('[data-nm]');
  ins.forEach((e,i)=>{e.oninput=()=>{L.names[i]=e.value;saveL();const a=e.parentNode.querySelector('.av-initial');a.textContent=initial(e.value||String(i+1))};
   e.onkeydown=ev=>{if(ev.key==='Enter'&&!ev.isComposing){ev.preventDefault();ins[i+1]?ins[i+1].focus():e.blur()}}});
