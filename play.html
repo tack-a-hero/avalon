@@ -1867,11 +1867,13 @@ html body #sheet:has(.vgrid)>.acts button{width:100%!important;min-height:44px!i
 </script><style id="avalon-flow-v13">html body #gate .role-intro-name{display:none!important}
 html body #gate .rolewrap.role-intro{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;height:100%!important;min-height:0!important;gap:12px!important;margin:0!important}
 html body #gate .rolewrap.role-intro>.role-intro-name{display:block!important;font-size:16px!important;line-height:1.5!important;margin:0!important;color:#eee5d1!important;text-align:center!important}
-html body #gate .rolewrap.role-intro>.rflip{width:min(260px,calc((var(--mobile-visible) - var(--mobile-safe-bottom) - 200px)*.666667),calc(100vw - 48px))!important;max-width:none!important;min-width:0!important;aspect-ratio:2/3!important;flex:none!important;transform-origin:top left!important}
+html body #gate .rolewrap.role-intro>.rflip{width:min(260px,calc((var(--mobile-visible) - var(--mobile-safe-bottom) - 200px)*.6),calc(100vw - 48px))!important;max-width:none!important;min-width:0!important;aspect-ratio:3/5!important;flex:none!important;transform-origin:top left!important}
 html body #gate .role-intro-role{display:none!important}
 html body #gate .rolewrap.role-intro>.role-intro-role{display:block!important;visibility:hidden!important;font-size:22px!important;line-height:1.4!important;font-weight:900!important;text-align:center!important;color:#eee5d1!important;margin:0!important}
 html body #gate .rolewrap.role-intro:has(.rflip.on)>.role-intro-role{visibility:visible!important}
-html body #gate .rolewrap>.rflip{transform-origin:top left!important}
+html body #gate .rolewrap>.rflip{transform-origin:top left!important;aspect-ratio:3/5!important;background:none!important;padding:0!important;border:0!important;box-shadow:none!important}
+html body #gate .rolewrap>.rflip .fc.front{background:none!important;padding:0!important;border:0!important;box-shadow:none!important}
+html body #gate .rolewrap>.rflip .fc.front img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important}
 html body #gate .rolewrap>.rflip,html body #gate .rolewrap>.rflip .fc,html body #gate .rolewrap>.rflip .fc img{border-radius:8px!important}
 html body #gate .rolewrap>.rflip .fc{overflow:hidden!important}
 html body .lobby .rolepick .rp .art,html body .lobby .rolepick .rp .art img{border-radius:8px!important}
@@ -1888,5 +1890,7 @@ html body .game .quest-contract .contract-label,html body .game .quest-contract 
 html body .game .quest-contract .contract-size b{color:#d5c49e!important}
 html body .game .quest-contract h4,html body .game .quest-contract p,html body .game .quest-contract .contract-await{color:#bdc5c8!important}
 @media(prefers-reduced-motion:reduce){html body #gate .rolewrap .fl-in{transition:none!important}}
+
+html body #gate .rolewrap>.rflip .fc.back{background:#14212d url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNjAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgMzYwIDYwMCI+PHJlY3Qgd2lkdGg9IjM2MCIgaGVpZ2h0PSI2MDAiIHJ4PSI4IiBmaWxsPSIjMTQyMTJkIi8+PHJlY3QgeD0iNSIgeT0iNSIgd2lkdGg9IjM1MCIgaGVpZ2h0PSI1OTAiIHJ4PSI2IiBmaWxsPSJub25lIiBzdHJva2U9IiNhNThhNTUiIHN0cm9rZS13aWR0aD0iMiIvPjxyZWN0IHg9IjE0IiB5PSIxNCIgd2lkdGg9IjMzMiIgaGVpZ2h0PSI1NzIiIHJ4PSIzIiBmaWxsPSJub25lIiBzdHJva2U9IiM2ZTY2NTMiLz48ZyBmaWxsPSJub25lIiBzdHJva2U9IiM3ZTczNTgiIHN0cm9rZS13aWR0aD0iMSI+PHBhdGggZD0iTTM2IDMwaDkwbTEwOCAwaDkwTTM2IDU3MGg5MG0xMDggMGg5ME0zMCAzNnY5MG0wIDM0OHY5ME0zMzAgMzZ2OTBtMCAzNDh2OTAiLz48cGF0aCBkPSJtMjYgMjYgMTggNC0xNCAxNFptMzA4IDAtMTggNCAxNCAxNFpNMjYgNTc0bDE4LTQtMTQtMTRabTMwOCAwLTE4LTQgMTQtMTRaIi8+PC9nPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I0OWE2NiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTgwIDE5MWMtMjQgMjEtNTUgMzEtNzkgMzV2ODFjMCA1NiA3OSAxMDIgNzkgMTAyczc5LTQ2IDc5LTEwMnYtODFjLTI0LTQtNTUtMTQtNzktMzVaIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNMTgwIDIxMWMtMjAgMTUtNDAgMjMtNjEgMjh2NjhjMCA0MSA2MSA4MCA2MSA4MHM2MS0zOSA2MS04MHYtNjhjLTIxLTUtNDEtMTMtNjEtMjhaIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTgwIDI0NHYxMDNtLTI4LTY4aDU2IiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJtMTY0IDM0MiAxNiAxNiAxNi0xNiIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9nPjxnIGZpbGw9IiNiNDlhNjYiPjxwYXRoIGQ9Im0xODAgMTE2IDUgMTIgMTIgNS0xMiA1LTUgMTItNS0xMi0xMi01IDEyLTVaIi8+PHBhdGggZD0ibTE4MCA0NTAgNCAxMCAxMCA0LTEwIDQtNCAxMC00LTEwLTEwLTQgMTAtNFoiLz48Y2lyY2xlIGN4PSI2MSIgY3k9IjMwMCIgcj0iMiIvPjxjaXJjbGUgY3g9IjI5OSIgY3k9IjMwMCIgcj0iMiIvPjwvZz48L3N2Zz4=") center/100% 100% no-repeat!important;animation:none!important;box-shadow:none!important;border:0!important;padding:0!important}
 </style></body>
 </html>
