@@ -1301,7 +1301,7 @@ PH.ASSASSIN=async()=>{
   <div class="fl assflip"><div class="fl-in">${cardBack()}<div class="fc front"><img src="${artOf(P(t))}" alt=""></div></div></div>
   <div class="verdict" id="av"><div class="banner ${hit?'n':'y'}"><b class="${hit?'evil':'gt'}">${ROLES[P(t).role].name}</b><span class="note">${hit?'暗殺成功 ― マーリンは討たれた':'暗殺失敗 ― マーリンは守られた'}</span></div></div>
   <div class="acts"><button class="btn btn-primary btn-lg" data-ok disabled>結末へ</button></div>`,async(b,c)=>{
-   tone(73,1.6,.06,'triangle');await wait(1500);b.querySelector('.assflip').classList.add('on');sfx.flip();
+   tone(73,1.6,.06,'triangle');await wait(1500);b.querySelector('.assflip').classList.add('on');const assassinCard=b.querySelector('.assflip');setTimeout(()=>{if(assassinCard.isConnected)assassinCard.classList.add('face-shown')},matchMedia('(prefers-reduced-motion: reduce)').matches?0:210);sfx.flip();
    await wait(900);b.querySelector('#av').classList.add('show');hit?sfx.bad():sfx.good();
    const btn=b.querySelector('[data-ok]');btn.disabled=false;btn.onclick=()=>c(true)},{wide:true});
  endGame(hit?'evil':'good',hit?`アサシンがマーリン（${P(t).name}）を見破りました。`:`アサシンは ${P(t).name}（${ROLES[P(t).role].name}）を選び、マーリンは守り抜かれました。`);
@@ -1312,7 +1312,7 @@ function endScreen(){
   const g=G.winner==='good';closeGate();
   const ids=G.players.map((_,i)=>i).sort((a,b)=>(side(P(a))===side(P(b))?0:side(P(a))==='good'?-1:1));
   $('#app').innerHTML=`<div class="wrap fade-in">
-   <div class="endhero ${g?'g':'e'}"><img class="bgimg" src="${g?ART.MERLIN:ART.MORDRED}" alt=""><img class="end-crest" src="${g?CREST.g:CREST.e}" alt=""><div class="eyebrow">${g?'Victory of the loyal':'Victory of Mordred'}</div><h1 class="${g?'g':'e'}">${g?'善の陣営の勝利':'悪の陣営の勝利'}</h1>${DIV()}<p>${esc(G.reason)}</p>${questsHTML(true)}</div>
+   <div class="endhero ${g?'g':'e'}"><img class="bgimg" src="${g?ART.MERLIN:ART.MORDRED}" alt=""><img class="end-crest" src="${g?CREST.g:CREST.e}" alt=""><div class="eyebrow">${g?'Victory of the loyal':'Victory of Mordred'}</div><h1 class="${g?'g':'e'}">${g?'善の陣営の勝利':'悪の陣営の勝利'}</h1>${DIV()}<p>${esc(G.reason)}</p><ol class="end-quest-results" aria-label="探索の結果">${G.results.map((result,q)=>`<li><span class="end-quest-number">${ROMAN[q]}</span><span class="end-quest-mark">${result==null?'<span aria-hidden="true">—</span>':`<img src="${result?CREST.g:CREST.e}" alt="">`}</span><span class="end-quest-status">${result==null?'未実施':result?'成功':'失敗'}</span></li>`).join('')}</ol></div>
    <section class="plate">${ORN}<div class="ph"><h3>役職の公開</h3></div><div class="roles">${ids.map(i=>{const p=P(i),R=ROLES[p.role],s=R.side==='good';return `<div class="rc ${s?'g':'e'} ${(s?'good':'evil')===G.winner?'w':''}"><div class="art"><img src="${artOf(p)}" alt=""><img class="rc-crest" src="${s?CREST.g:CREST.e}" alt=""></div><div class="rn">${nm(i)}</div><div class="rr">${R.name}</div></div>`}).join('')}</div></section>
    ${G.history.length?`<section class="plate">${ORN}<div class="ph"><h3>${ic('scroll')} 年代記</h3><span class="eyebrow">Chronicle</span></div><table class="hist">${histRows()}</table></section>`:''}
   </div><div class="dock"><div class="dock-in"><button class="btn btn-ghost" id="toLobby">メンバー変更</button><button class="btn btn-primary btn-lg" id="again">もう一度遊ぶ</button></div></div>`;
@@ -1895,5 +1895,39 @@ html body .game .quest-contract h4,html body .game .quest-contract p,html body .
 @media(prefers-reduced-motion:reduce){html body #gate .rolewrap .fl-in{transition:none!important}}
 
 html body #gate .rolewrap>.rflip .fc.back{background:#14212d url("mobile-assets/avalon-role-back-v14.webp") center/100% 100% no-repeat!important;animation:none!important;box-shadow:none!important;border:0!important;padding:0!important}
+</style><style id="avalon-alignment-v15">html body .end-quest-results{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important;width:min(100%,400px)!important;margin:24px auto 0!important;padding:0!important;list-style:none!important}
+html body .end-quest-results li{display:grid!important;grid-template-rows:20px 48px 24px!important;justify-items:center!important;align-items:center!important;gap:8px!important;min-width:0!important;margin:0!important;padding:0!important;color:#eee5d1!important;text-align:center!important}
+html body .end-quest-number{font-size:12px!important;line-height:20px!important;color:#bda875!important;letter-spacing:0!important}
+html body .end-quest-mark{display:grid!important;place-items:center!important;position:static!important;width:48px!important;height:48px!important;font-size:24px!important;line-height:1!important;color:#87949b!important}
+html body .end-quest-mark img{display:block!important;position:static!important;inset:auto!important;width:44px!important;height:44px!important;object-fit:contain!important;margin:0!important;transform:none!important;translate:none!important}
+html body .end-quest-status{font-size:13px!important;line-height:24px!important;white-space:nowrap!important;letter-spacing:0!important}
+html body #gate .choices{align-items:stretch!important}
+html body #gate .choices .cc{display:block!important;position:relative!important;width:100%!important;min-width:0!important;height:auto!important;aspect-ratio:2/3!important;box-sizing:border-box!important;padding:0!important;border:0!important;margin:0!important;border-radius:8px!important;transform:none!important;translate:none!important;rotate:0deg!important}
+html body #gate .choices .cc.on{outline:2px solid #dfc88e!important;outline-offset:3px!important;transform:none!important;box-shadow:none!important}
+html body #gate .choices.picked .cc:not(.on){transform:none!important}
+html body #gate .cc .qface{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;box-sizing:border-box!important;padding:0 8px 16px!important;border-radius:8px!important}
+html body #gate .cc .qface .en,html body #gate .cc .qface b{display:block!important;position:relative!important;width:100%!important;box-sizing:border-box!important;margin:0!important;padding:0!important;text-align:center!important;line-height:1.3!important;transform:none!important;translate:none!important}
+html body #gate .cc .qface .en{font-size:11px!important;letter-spacing:.1em!important}
+html body #gate .cc .qface b{font-size:22px!important;letter-spacing:.06em!important}
+html body #sheetbox:has(.assflip){height:calc(var(--mobile-visible) - var(--mobile-safe-bottom) - 16px)!important;max-height:100%!important;box-sizing:border-box!important;padding:0!important;display:flex!important;overflow:hidden!important}
+html body #sheet:has(.assflip){display:grid!important;grid-template-rows:auto minmax(0,1fr) auto auto!important;align-items:center!important;justify-items:center!important;gap:12px!important;width:100%!important;height:100%!important;min-height:0!important;max-height:100%!important;box-sizing:border-box!important;overflow:visible!important;padding:16px!important}
+html body #sheet:has(.assflip)>.ctr{width:100%!important;flex:none!important}
+html body #sheet:has(.assflip) h2{font-size:20px!important;line-height:1.5!important;margin:0!important}
+html body #sheet .assflip{width:auto!important;min-width:0!important;max-width:100%!important;height:min(100%,433.333px,calc((100vw - 64px)*5/3))!important;max-height:100%!important;aspect-ratio:3/5!important;align-self:center!important;justify-self:center!important;flex:none!important;padding:0!important;border:0!important;border-radius:8px!important;background:none!important;box-shadow:none!important;margin:0!important;animation:none!important}
+html body #sheet .assflip .fl-in{width:100%!important;height:100%!important;transform-style:preserve-3d!important;transition:transform 420ms ease!important;overflow:visible!important}
+html body #sheet .assflip .fc,html body #sheet .assflip .fc img{width:100%!important;height:100%!important;border:0!important;padding:0!important;margin:0!important;border-radius:8px!important;box-sizing:border-box!important;box-shadow:none!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
+html body #sheet .assflip .fc.front img{display:block!important;object-fit:contain!important}
+html body #sheet .assflip .fc.back{background:#14212d url("mobile-assets/avalon-role-back-v14.webp") center/100% 100% no-repeat!important;animation:none!important}
+html body #sheet .assflip:not(.face-shown) .fc.front{visibility:hidden!important}
+html body #sheet .assflip.face-shown .fc.back{visibility:hidden!important}
+html body #sheet:has(.assflip)>.verdict{width:100%!important;flex:none!important;margin:0!important}
+html body #sheet:has(.assflip) .banner{padding:4px 8px!important}
+html body #sheet:has(.assflip) .banner b{font-size:22px!important;line-height:1.4!important}
+html body #sheet:has(.assflip) .banner .note{font-size:12px!important;line-height:1.6!important}
+html body #sheet:has(.assflip)>.acts{width:100%!important;flex:none!important;margin:0!important;padding:0!important}
+html body #sheet:has(.assflip)>.acts button{min-height:44px!important;width:100%!important}
+@media(orientation:landscape) and (max-height:450px){html body #sheet:has(.assflip){display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;gap:12px 24px!important}html body #sheet:has(.assflip)>.ctr{grid-column:1!important;grid-row:1!important}html body #sheet .assflip{grid-column:2!important;grid-row:1/4!important;justify-self:center!important;width:auto!important}html body #sheet:has(.assflip)>.verdict{grid-column:1!important;grid-row:2!important}html body #sheet:has(.assflip)>.acts{grid-column:1!important;grid-row:3!important}}
+@media(max-width:340px){html body .end-quest-results{gap:8px!important}html body .end-quest-mark{width:40px!important;height:40px!important}html body .end-quest-mark img{width:36px!important;height:36px!important}html body .end-quest-results li{grid-template-rows:20px 40px 24px!important}html body .end-quest-status{font-size:12px!important}}
+@media(prefers-reduced-motion:reduce){html body #sheet .assflip .fl-in{transition:none!important}}
 </style></body>
 </html>
