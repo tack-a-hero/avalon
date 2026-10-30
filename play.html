@@ -1045,7 +1045,7 @@ function modal(html,setup,{dismiss=false,wide=false}={}){
 const ask=(title,body,yes='OK',no=null,cls='btn-primary')=>modal(`<div class="ctr"><h2>${title}</h2>${DIV('sm')}${body?`<p>${body}</p>`:''}</div><div class="acts">${no?`<button class="btn btn-ghost" data-no>${no}</button>`:''}<button class="btn ${cls}" data-yes>${yes}</button></div>`,
  (b,c)=>{b.querySelector('[data-yes]').onclick=()=>c(true);const n=b.querySelector('[data-no]');if(n)n.onclick=()=>c(false)});
 function gateView(html,setup){
- return new Promise(res=>{const g=$('#gate');g.innerHTML=`<div class="gate-phase"><span>${G?('QUEST '+ROMAN[Math.min(G.quest,4)]):'AVALON'}</span><b>${G&&G.phase==='VOTE'?'秘密投票':G&&G.phase==='QUEST'?'探索カードの提出':G&&G.phase==='ROLES'?'役職を確認しています':'秘密の確認'}</b></div><div class="gate-in">${html}</div>`;g.classList.add('open');g.scrollTop=0;setup(g,v=>res(v))});
+ return new Promise(res=>{const g=$('#gate');g.innerHTML=`<div class="gate-in">${html}</div>`;g.classList.add('open');g.scrollTop=0;setup(g,v=>res(v))});
 }
 const closeGate=()=>{const g=$('#gate');g.classList.remove('open');g.innerHTML=''};
 function passTo(i,why){
@@ -1068,7 +1068,7 @@ function roleCardView(i){
  else if(p.role==='OBERON'){kh=`<h4>${ic('dagger')} あなたは仲間の悪を知らず、仲間もあなたを知りません。</h4>`;ve=true}
  const list=k.length?`<div class="kl">${k.map(x=>`<span class="kp ${x.k}">${avatar(x.j)}${nm(x.j)}</span>`).join('')}</div>`:(kh&&p.role!=='OBERON'?'<div class="note">該当する人はいません。</div>':'');
  return `<div class="rolewrap role-intro"><p class="role-intro-name">${nm(i)}</p><div class="fl rflip ${g?'g':'e'}" data-flip tabindex="0" role="button" aria-label="役職カードをめくる"><div class="fl-in">${cardBack(true)}<div class="fc front"><img src="${artOf(p)}" alt="${R.name}"></div></div></div>
-  <p class="role-flip-hint">タップしてめくる</p><button class="btn btn-primary role-intro-next" data-detail disabled>説明を見る →</button><div class="rinfo"><p class="role-person">${nm(i)}</p>${factionMark(g)}
+  <p class="role-intro-role">${R.name}</p><p class="role-flip-hint">タップしてめくる</p><button class="btn btn-primary role-intro-next" data-detail disabled>説明を見る →</button><div class="rinfo"><p class="role-person">${nm(i)}</p>${factionMark(g)}
   <h2 class="rname gt">${R.name}</h2><div class="ren">${R.en}</div>${DIV()}
   <p class="rdesc">${R.desc}</p>${kh?`<div class="vision ${ve?'e':''}">${kh}${list}</div>`:''}
   
@@ -1080,7 +1080,7 @@ function roleCard(i){
  return gateView(roleCardView(i),(g,done)=>{
   const f=g.querySelector('[data-flip]'),ok=g.querySelector('[data-ok]');ok.disabled=true;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f.click()}};
   const detail=g.querySelector('[data-detail]');detail.onclick=()=>{if(!f.classList.contains('on'))return;const wrap=f.closest('.rolewrap'),from=f.getBoundingClientRect();wrap.classList.remove('role-intro');const to=f.getBoundingClientRect();const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const move=!reduced&&f.animate?f.animate([{transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`},{transform:'none'}],{duration:240,easing:'ease-out'}):null;if(move){move.onfinish=()=>{ok.disabled=false};move.oncancel=()=>{ok.disabled=false}}else ok.disabled=false};
-  f.onclick=()=>{if(f.classList.contains('on'))return;f.classList.add('on');sfx.flip();setTimeout(sfx.reveal,350*sp());setTimeout(()=>{if(f.isConnected)detail.disabled=false},matchMedia('(prefers-reduced-motion: reduce)').matches?0:420)};
+  f.onclick=()=>{if(f.classList.contains('on'))return;f.classList.add('on');sfx.flip();setTimeout(sfx.reveal,350*sp());setTimeout(()=>{if(f.isConnected)f.classList.add('role-face-shown')},matchMedia('(prefers-reduced-motion: reduce)').matches?0:210);setTimeout(()=>{if(f.isConnected){f.classList.add('role-revealed');detail.disabled=false}},matchMedia('(prefers-reduced-motion: reduce)').matches?0:420)};
   ok.onclick=()=>{sfx.tap();done()};
  });
 }
@@ -1867,14 +1867,25 @@ html body #sheet:has(.vgrid)>.acts button{width:100%!important;min-height:44px!i
 </script><style id="avalon-flow-v13">html body #gate .role-intro-name{display:none!important}
 html body #gate .rolewrap.role-intro{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;height:100%!important;min-height:0!important;gap:12px!important;margin:0!important}
 html body #gate .rolewrap.role-intro>.role-intro-name{display:block!important;font-size:16px!important;line-height:1.5!important;margin:0!important;color:#eee5d1!important;text-align:center!important}
-html body #gate .rolewrap.role-intro>.rflip{width:min(260px,calc((var(--mobile-visible) - var(--mobile-safe-bottom) - 140px)*.666667),calc(100vw - 48px))!important;max-width:none!important;min-width:0!important;aspect-ratio:2/3!important;flex:none!important;transform-origin:top left!important}
-html body #gate .rolewrap>.rflip{transform-origin:top left!important}
+html body #gate .rolewrap.role-intro>.rflip{width:min(260px,calc((var(--mobile-visible) - var(--mobile-safe-bottom) - env(safe-area-inset-top,0px) - 164px)*.6),calc(100vw - 48px))!important;max-width:none!important;min-width:0!important;aspect-ratio:3/5!important;flex:none!important;transform-origin:top left!important}
+html body #gate .role-intro-role{display:none!important}
+html body #gate .rolewrap.role-intro>.role-intro-role{display:block!important;visibility:hidden!important;font-size:22px!important;line-height:1.4!important;font-weight:900!important;text-align:center!important;color:#eee5d1!important;margin:0!important}
+html body #gate .rolewrap.role-intro:has(.rflip.role-revealed)>.role-intro-role{visibility:visible!important}
+html body #gate .rolewrap>.rflip .fc,html body #gate .rolewrap>.rflip .fc img{backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
+html body #gate .rolewrap>.rflip:not(.role-face-shown) .fc.front{visibility:hidden!important}
+html body #gate .rolewrap>.rflip.role-face-shown .fc.back{visibility:hidden!important}
+html body #gate .rolewrap>.rflip{transform-origin:top left!important;aspect-ratio:3/5!important;background:none!important;padding:0!important;border:0!important;box-shadow:none!important}
+html body #gate .rolewrap>.rflip .fc.front{background:none!important;padding:0!important;border:0!important;box-shadow:none!important}
+html body #gate .rolewrap>.rflip .fc.front img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important}
+html body #gate .rolewrap>.rflip,html body #gate .rolewrap>.rflip .fc,html body #gate .rolewrap>.rflip .fc img{border-radius:8px!important}
+html body #gate .rolewrap>.rflip .fc{overflow:hidden!important}
+html body .lobby .rolepick .rp .art,html body .lobby .rolepick .rp .art img{border-radius:8px!important}
 html body #gate .rolewrap .fl-in{transition:transform 420ms ease!important}
 html body #gate .rolewrap.role-intro>.rinfo,html body #gate .rolewrap.role-intro>.role-confirm,html body #gate .rolewrap.role-intro>.role-advice{display:none!important}
 html body #gate .rolewrap.role-intro>.role-flip-hint{display:block!important;visibility:visible!important;font-size:13px!important;margin:0!important;padding:0!important;line-height:1.5!important}
 html body #gate .rolewrap.role-intro:has(.rflip.on)>.role-flip-hint{display:none!important}
 html body #gate .role-intro-next{display:none!important}
-html body #gate .rolewrap.role-intro:has(.rflip.on)>.role-intro-next{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:48px!important;padding:10px 24px!important;margin:0!important;font-size:15px!important}
+html body #gate .rolewrap.role-intro:has(.rflip.role-revealed)>.role-intro-next{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:48px!important;padding:10px 24px!important;margin:0!important;font-size:15px!important}
 html body .game .quest-contract{background:none!important;background-image:none!important;border:0!important;border-image:none!important;border-radius:0!important;box-shadow:none!important;color:#e8e6dc!important;padding:12px 0!important}
 html body .game .quest-contract:before,html body .game .quest-contract:after{display:none!important;content:none!important}
 html body .game .quest-contract .contract-size,html body .game .quest-contract .contract-team,html body .game .quest-contract .contract-law{background:none!important;border:0!important;box-shadow:none!important;color:#e8e6dc!important}
@@ -1882,5 +1893,7 @@ html body .game .quest-contract .contract-label,html body .game .quest-contract 
 html body .game .quest-contract .contract-size b{color:#d5c49e!important}
 html body .game .quest-contract h4,html body .game .quest-contract p,html body .game .quest-contract .contract-await{color:#bdc5c8!important}
 @media(prefers-reduced-motion:reduce){html body #gate .rolewrap .fl-in{transition:none!important}}
+
+html body #gate .rolewrap>.rflip .fc.back{background:#14212d url("mobile-assets/avalon-role-back-v13.webp") center/100% 100% no-repeat!important;animation:none!important;box-shadow:none!important;border:0!important;padding:0!important}
 </style></body>
 </html>
