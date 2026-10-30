@@ -1067,8 +1067,8 @@ function roleCardView(i){
  else if(!g&&p.role!=='OBERON'){kh=`<h4>${ic('dagger')} 悪の仲間${G.players.some(q=>q.role==='OBERON')?'（オベロンは見えません）':''}</h4>`;ve=true}
  else if(p.role==='OBERON'){kh=`<h4>${ic('dagger')} あなたは仲間の悪を知らず、仲間もあなたを知りません。</h4>`;ve=true}
  const list=k.length?`<div class="kl">${k.map(x=>`<span class="kp ${x.k}">${avatar(x.j)}${nm(x.j)}</span>`).join('')}</div>`:(kh&&p.role!=='OBERON'?'<div class="note">該当する人はいません。</div>':'');
- return `<div class="rolewrap"><div class="fl rflip ${g?'g':'e'}" data-flip tabindex="0" role="button" aria-label="役職カードをめくる"><div class="fl-in">${cardBack(true)}<div class="fc front"><img src="${artOf(p)}" alt="${R.name}"></div></div></div>
-  <p class="role-flip-hint">タップしてめくる</p><div class="rinfo"><p class="role-person">${nm(i)}</p>${factionMark(g)}
+ return `<div class="rolewrap role-intro"><p class="role-intro-name">${nm(i)}</p><div class="fl rflip ${g?'g':'e'}" data-flip tabindex="0" role="button" aria-label="役職カードをめくる"><div class="fl-in">${cardBack(true)}<div class="fc front"><img src="${artOf(p)}" alt="${R.name}"></div></div></div>
+  <p class="role-flip-hint">タップしてめくる</p><button class="btn btn-primary role-intro-next" data-detail disabled>説明を見る →</button><div class="rinfo"><p class="role-person">${nm(i)}</p>${factionMark(g)}
   <h2 class="rname gt">${R.name}</h2><div class="ren">${R.en}</div>${DIV()}
   <p class="rdesc">${R.desc}</p>${kh?`<div class="vision ${ve?'e':''}">${kh}${list}</div>`:''}
   
@@ -1079,7 +1079,8 @@ function factionMark(g,big){return `<div class="faction ${g?'g':'e'} ${big?'big'
 function roleCard(i){
  return gateView(roleCardView(i),(g,done)=>{
   const f=g.querySelector('[data-flip]'),ok=g.querySelector('[data-ok]');ok.disabled=true;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f.click()}};
-  f.onclick=()=>{if(f.classList.contains('on'))return;f.classList.add('on');sfx.flip();setTimeout(sfx.reveal,350*sp());setTimeout(()=>{ok.disabled=false},600*sp())};
+  const detail=g.querySelector('[data-detail]');detail.onclick=()=>{if(!f.classList.contains('on'))return;const wrap=f.closest('.rolewrap'),from=f.getBoundingClientRect();wrap.classList.remove('role-intro');const to=f.getBoundingClientRect();const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const move=!reduced&&f.animate?f.animate([{transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`},{transform:'none'}],{duration:240,easing:'ease-out'}):null;if(move){move.onfinish=()=>{ok.disabled=false};move.oncancel=()=>{ok.disabled=false}}else ok.disabled=false};
+  f.onclick=()=>{if(f.classList.contains('on'))return;f.classList.add('on');sfx.flip();setTimeout(sfx.reveal,350*sp());setTimeout(()=>{if(f.isConnected)detail.disabled=false},matchMedia('(prefers-reduced-motion: reduce)').matches?0:420)};
   ok.onclick=()=>{sfx.tap();done()};
  });
 }
@@ -1411,7 +1412,7 @@ function renderLobby(){
    <div class="names">${L.names.map((v,i)=>`<label class="nrow">${GameArt.button(i)}<input data-nm="${i}" maxlength="10" value="${esc(v)}" placeholder="プレイヤー${i+1}" autocomplete="off" enterkeyhint="${i<n-1?'next':'done'}"></label>`).join('')}</div>
    <p class="note" style="margin-top:12px">時計回りに入力。兜は役職を表しません。</p><p class="crest-note"><b>紋章はプレイヤーの目印</b>です。人物が描かれた役職カードとは別で、紋章から役職や陣営は分かりません。</p></section>
   <section class="plate">${ORN}<div class="ph"><h3>${ic('shield')} 登場する役職</h3>${L.custom?'<button class="linkbtn" id="preset">おすすめに戻す</button>':'<span class="note">おすすめ構成</span>'}</div>
-   <div class="rolepick">${rp('MERLIN',1)}${rp('ASSASSIN',1)}${OPT_ROLES.map(k=>rp(k,0)).join('')}</div>
+   <div class="rolepick">${rp('MERLIN',1)}${rp('LOYAL',1)}${rp('ASSASSIN',1)}${OPT_ROLES.map(k=>rp(k,0)).join('')}</div>
    <div class="teamsum"><div class="ts g"><img src="${CREST.g}" alt=""><b>${gN}<small>人</small></b><span class="k">善の陣営</span><span class="who">${gl}</span></div><div class="ts e"><img src="${CREST.e}" alt=""><b>${eN}<small>人</small></b><span class="k">悪の陣営</span><span class="who">${el}</span></div></div>
    ${L.roles.includes('MORGANA')&&!L.roles.includes('PERCIVAL')?'<p class="note" style="margin-top:10px;color:#ffb4aa">モルガナはパーシヴァルがいるときに効果を発揮します。</p>':''}</section>
   <section class="plate">${ORN}<div class="optrow"><div><div class="t">${ic('lady')} 湖の乙女</div><div class="d">第2〜4クエストの後に1人の陣営を確認できる（7人以上におすすめ）</div></div><button class="tg ${L.lady?'on':''}" id="lady" aria-label="湖の乙女" aria-pressed="${L.lady}"></button></div>
@@ -1863,5 +1864,23 @@ html body #sheet:has(.vgrid)>.acts button{width:100%!important;min-height:44px!i
  const schedule=()=>{if(!queued){queued=true;requestAnimationFrame(sync)}};
  addEventListener('resize',schedule);addEventListener('pageshow',schedule);visualViewport?.addEventListener('resize',schedule);visualViewport?.addEventListener('scroll',schedule);sync();
 })();
-</script></body>
+</script><style id="avalon-flow-v13">html body #gate .role-intro-name{display:none!important}
+html body #gate .rolewrap.role-intro{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;height:100%!important;min-height:0!important;gap:12px!important;margin:0!important}
+html body #gate .rolewrap.role-intro>.role-intro-name{display:block!important;font-size:16px!important;line-height:1.5!important;margin:0!important;color:#eee5d1!important;text-align:center!important}
+html body #gate .rolewrap.role-intro>.rflip{width:min(260px,calc((var(--mobile-visible) - var(--mobile-safe-bottom) - 140px)*.666667),calc(100vw - 48px))!important;max-width:none!important;min-width:0!important;aspect-ratio:2/3!important;flex:none!important;transform-origin:top left!important}
+html body #gate .rolewrap>.rflip{transform-origin:top left!important}
+html body #gate .rolewrap .fl-in{transition:transform 420ms ease!important}
+html body #gate .rolewrap.role-intro>.rinfo,html body #gate .rolewrap.role-intro>.role-confirm,html body #gate .rolewrap.role-intro>.role-advice{display:none!important}
+html body #gate .rolewrap.role-intro>.role-flip-hint{display:block!important;visibility:visible!important;font-size:13px!important;margin:0!important;padding:0!important;line-height:1.5!important}
+html body #gate .rolewrap.role-intro:has(.rflip.on)>.role-flip-hint{display:none!important}
+html body #gate .role-intro-next{display:none!important}
+html body #gate .rolewrap.role-intro:has(.rflip.on)>.role-intro-next{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:48px!important;padding:10px 24px!important;margin:0!important;font-size:15px!important}
+html body .game .quest-contract{background:none!important;background-image:none!important;border:0!important;border-image:none!important;border-radius:0!important;box-shadow:none!important;color:#e8e6dc!important;padding:12px 0!important}
+html body .game .quest-contract:before,html body .game .quest-contract:after{display:none!important;content:none!important}
+html body .game .quest-contract .contract-size,html body .game .quest-contract .contract-team,html body .game .quest-contract .contract-law{background:none!important;border:0!important;box-shadow:none!important;color:#e8e6dc!important}
+html body .game .quest-contract .contract-label,html body .game .quest-contract .contract-size>span,html body .game .quest-contract .contract-law,html body .game .quest-contract .contract-team small{color:#bdc5c8!important}
+html body .game .quest-contract .contract-size b{color:#d5c49e!important}
+html body .game .quest-contract h4,html body .game .quest-contract p,html body .game .quest-contract .contract-await{color:#bdc5c8!important}
+@media(prefers-reduced-motion:reduce){html body #gate .rolewrap .fl-in{transition:none!important}}
+</style></body>
 </html>
