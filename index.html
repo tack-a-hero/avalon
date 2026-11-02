@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><meta name="app-release" content="screen-repair-20261029-v10"><script>window.SessionUI=(()=>{
+<head><style id="refinement-v21">@layer approvalV21,squareNotebookV21,passV21;@layer approvalV21{
+ html body :is(#approveTeam,#rejectTeam){display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:48px!important;padding:12px 24px!important;font:inherit!important;font-weight:700!important;line-height:1.3!important;border-radius:6px!important;box-shadow:none!important;background-image:none!important;text-shadow:none!important;transform:none!important}
+ html body #approveTeam{background:#d2bc85!important;color:#172330!important;border:1px solid #d2bc85!important}
+ html body #rejectTeam{background:transparent!important;color:#e6d8b7!important;border:1px solid #8b806b!important}
+ html body :is(#approveTeam,#rejectTeam):active{opacity:.8!important}
+ html body :is(#approveTeam,#rejectTeam):focus-visible{outline:2px solid #f2dc9e!important;outline-offset:3px!important}
+}</style><meta name="app-release" content="screen-repair-20261029-v10"><script>window.SessionUI=(()=>{
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const icon=p=>p.icon||(window.GameArt?GameArt.person(p.seat??p.id):'');
  const rows=players=>players.map(p=>`<button type="button" class="session-seat ${p.done?'is-confirmed':''}" data-seat="${esc(p.id)}" ${p.disabled?'disabled':''}><span class="session-face">${icon(p)}</span><span class="session-seat-copy"><b>${esc(p.name)}</b><small>${esc(p.status||(p.done?'確認済み':'タップして確認'))}</small></span><span class="session-chevron" aria-hidden="true">${p.done?'✓':'›'}</span></button>`).join('');
@@ -1166,13 +1172,13 @@ PH.TEAM=()=>new Promise(res=>{
 PH.VOTE=async()=>{
  mark(`クエスト${ROMAN[G.quest]}：卓上投票の結果入力`);
  G.voteOutcome=await new Promise(resolve=>renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'メンバー案の投票結果',desc:'テーブルで投票し、最終結果だけ入力してください。',tile:i=>({sel:G.team.includes(i)}),below:`<div class="table-proposal">${G.team.map(i=>`<span>${avatar(i)}${nm(i)}</span>`).join('')}</div>`,dock:'<button class="btn btn-primary btn-lg" id="approveTeam">承認</button><button class="btn btn-danger btn-lg" id="rejectTeam">却下</button>',setup:()=>{$('#approveTeam').onclick=()=>resolve(true);$('#rejectTeam').onclick=()=>resolve(false)}}));
- G.votes={};G.voteIdx=0;G.phase='VOTE_REVEAL';
+ G.votes={};G.voteIdx=0;G.phase='VOTE_RESULT';
 };
 async function tableRevealReady(kind){
  await gateView(`<section class="table-result-ready"><div class="eyebrow">${kind==='quest'?'クエストの提出':'出陣の承認投票'}</div><h2>全員の投票が完了しました</h2><p>全員が見られる位置に端末を置いてください。</p><button class="btn btn-primary btn-lg" data-reveal-result>投票結果を見る</button></section>`,(box,done)=>{box.querySelector('[data-reveal-result]').onclick=()=>done(true)});
  closeGate();
 }
-PH.VOTE_REVEAL=async()=>{await tableRevealReady('team');G.phase='VOTE_RESULT'};
+PH.VOTE_REVEAL=async()=>{G.phase='VOTE_RESULT'};
 PH.QUEST_REVEAL=async()=>{await tableRevealReady('quest');G.phase='QUEST_RESULT'};
 
 function choiceSetup(g,done,guard){
