@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><style id="refinement-v22">@layer ballotV22{
+<head><style id="refinement-v23">@layer centralBallotV23{
+ html body #app>.game:has(.team-ballot-view){position:relative!important;display:flex!important;flex-direction:column!important;min-height:0!important;height:var(--app-view-h,calc(100svh - 56px))!important;padding:16px!important;box-sizing:border-box!important;overflow:auto!important}
+ html body .game:has(.team-ballot-view) :is(.seat-area,.board-area,.table-links){display:none!important}
+ html body .game:has(.team-ballot-view) .table-main{display:flex!important;flex-direction:column!important;flex:1!important;min-height:0!important;width:100%!important;margin:0!important;padding:0!important;gap:12px!important}
+ html body .game:has(.team-ballot-view) .orderbar{flex:none!important;padding:0!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important}
+ html body .team-ballot-view{display:flex!important;flex-direction:column!important;flex:1!important;min-height:0!important;width:100%!important;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+ html body .team-ballot-view .table-proposal{flex:none!important;margin:0!important}
+ html body .team-ballot-cards{position:absolute!important;inset:50% 0 auto!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:0!important;gap:24px!important;padding:12px 0!important;background:none!important;border:0!important;box-shadow:none!important}
+ html body .team-ballot-cards :is(#approveTeam,#rejectTeam){height:auto!important;aspect-ratio:2/3!important;width:min(clamp(106.667px,30svh,226.667px),calc((100vw - 56px)/2))!important;max-width:none!important;flex:none!important;background:none!important}
+ html body .team-ballot-cards :is(#approveTeam,#rejectTeam) b{font-size:clamp(17px,3svh,24px)!important}
+ @media(max-height:450px){html body #app>.game:has(.team-ballot-view){padding:8px 16px!important}html body .game:has(.team-ballot-view) .table-main{gap:4px!important}html body .game:has(.team-ballot-view) .orderbar .eyebrow,html body .game:has(.team-ballot-view) .orderbar .sd{display:none!important}html body .team-ballot-cards{padding:4px 0!important}}
+}</style><style id="refinement-v22">@layer ballotV22{
  html body :is(#approveTeam,#rejectTeam){display:block!important;flex:0 0 auto!important;width:clamp(58.667px,14svh,100px)!important;height:clamp(88px,21svh,150px)!important;min-height:0!important;padding:0!important;background:transparent!important;background-image:none!important;color:inherit!important;border:0!important;border-radius:8px!important;box-shadow:none!important;overflow:hidden!important;transition:opacity 180ms!important}
  html body :is(#approveTeam,#rejectTeam) .qface{display:block!important;position:relative!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:hidden!important;border-radius:8px!important}
  html body :is(#approveTeam,#rejectTeam) img{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;border:0!important;background:none!important}
@@ -1181,7 +1192,7 @@ PH.TEAM=()=>new Promise(res=>{
 });
 PH.VOTE=async()=>{
  mark(`クエスト${ROMAN[G.quest]}：卓上投票の結果入力`);
- G.voteOutcome=await new Promise(resolve=>renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'メンバー案の投票結果',desc:'テーブルで投票し、最終結果だけ入力してください。',tile:i=>({sel:G.team.includes(i)}),below:`<div class="table-proposal">${G.team.map(i=>`<span>${avatar(i)}${nm(i)}</span>`).join('')}</div>`,dock:`<button class="table-ballot" id="approveTeam" aria-label="承認">${qface('y')}</button><button class="table-ballot" id="rejectTeam" aria-label="却下">${qface('n')}</button>`,setup:()=>{$('#approveTeam').onclick=()=>resolve(true);$('#rejectTeam').onclick=()=>resolve(false)}}));
+ G.voteOutcome=await new Promise(resolve=>renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'メンバー案の投票結果',desc:'テーブルで投票し、最終結果だけ入力してください。',tile:i=>({sel:G.team.includes(i)}),below:`<section class="team-ballot-view"><div class="table-proposal">${G.team.map(i=>`<span>${avatar(i)}${nm(i)}</span>`).join('')}</div><div class="team-ballot-cards"><button class="table-ballot" id="approveTeam" aria-label="承認">${qface('y')}</button><button class="table-ballot" id="rejectTeam" aria-label="却下">${qface('n')}</button></div></section>`,setup:()=>{$('#approveTeam').onclick=()=>resolve(true);$('#rejectTeam').onclick=()=>resolve(false)}}));
  G.votes={};G.voteIdx=0;G.phase='VOTE_RESULT';
 };
 async function tableRevealReady(kind){
