@@ -1093,14 +1093,14 @@ function questsHTML(end=false){
  return `<div class="quests">${QSIZE[N()].map((s,q)=>{const r=G.results[q],cur=!end&&q===G.quest&&r==null&&G.phase!=='ASSASSIN'&&G.phase!=='END';
   return `<div class="qm ${cur?'cur':''} ${r!=null?'past':''}" id="${end?'eq':'qs'}${q}"><span class="rn">${ROMAN[q]}</span><div class="disc"><b>${s}</b>${token(r)}</div><span class="two ${needFails(N(),q)>1?'':'x'}">失敗2枚</span></div>`}).join('')}</div>`;
 }
-function questContract(){if(['END','ROLES','TEAM','VOTE','VOTE_RESULT'].includes(G.phase))return '';if(G.phase==='ASSASSIN')return '<aside class="quest-contract assassination"><div class="contract-label">最後の試練 / ASSASSINATION</div><h4>探索は3回成功。まだ勝負は続きます。</h4><p>暗殺者がマーリンを見抜けば、悪の陣営が逆転します。</p></aside>';const q=Math.min(G.quest,4),need=QSIZE[N()][q],two=needFails(N(),q)>1;return '<aside class="quest-contract"><div class="contract-label">QUEST '+ROMAN[q]+' / 探索の条件</div><div class="contract-body"><div class="contract-size"><b>'+need+'</b><span>人を選出</span></div><div class="contract-team">'+(G.team.length?G.team.map(i=>'<span>'+avatar(i)+'<small>'+esc(P(i).name)+'</small></span>').join(''):'<span class="contract-await">リーダーがメンバーを選びます</span>')+'</div></div><div class="contract-law"><span class="law-cards" aria-hidden="true"><i>失敗</i>'+(two?'<i>失敗</i>':'')+'</span><span>失敗札が <b>'+needFails(N(),q)+' 枚以上</b>で探索失敗'+(two?'（7人以上・第IV探索）':'')+'</span></div></aside>';}
+function questContract(){if(['END','ROLES','TEAM','VOTE','VOTE_REVEAL','VOTE_RESULT'].includes(G.phase))return '';if(G.phase==='ASSASSIN')return '<aside class="quest-contract assassination"><div class="contract-label">最後の試練 / ASSASSINATION</div><h4>探索は3回成功。まだ勝負は続きます。</h4><p>暗殺者がマーリンを見抜けば、悪の陣営が逆転します。</p></aside>';const q=Math.min(G.quest,4),need=QSIZE[N()][q],two=needFails(N(),q)>1;return '<aside class="quest-contract"><div class="contract-label">QUEST '+ROMAN[q]+' / 探索の条件</div><div class="contract-body"><div class="contract-size"><b>'+need+'</b><span>人を選出</span></div><div class="contract-team">'+(G.team.length?G.team.map(i=>'<span>'+avatar(i)+'<small>'+esc(P(i).name)+'</small></span>').join(''):'<span class="contract-await">リーダーがメンバーを選びます</span>')+'</div></div><div class="contract-law"><span class="law-cards" aria-hidden="true"><i>失敗</i>'+(two?'<i>失敗</i>':'')+'</span><span>失敗札が <b>'+needFails(N(),q)+' 枚以上</b>で探索失敗'+(two?'（7人以上・第IV探索）':'')+'</span></div></aside>';}
 function boardHTML(){
  return `<section class="board" aria-label="探索の盤面"><div class="board-heading"><div class="board-title"><h3>円卓の探索</h3><small>THE FIVE QUESTS</small></div><span class="score"><span class="good">成功<b>${wins()}<small>/ 3</small></b></span><span class="evil">失敗<b>${losses()}<small>/ 3</small></b></span></span></div><div class="art-board">${questsHTML()}<div class="rejection-wells" aria-label="連続否決 ${G.rejects}回">${[0,1,2,3,4].map(k=>`<i class="sk ${k<G.rejects?'on':''} ${k===4?'last':''}" id="sk${k}">${k+1}</i>`).join('')}</div></div><div class="board-base"><span>探索3成功で暗殺戦へ <i>／</i> 探索3失敗で悪の勝利</span><span class="reject-caption">連続否決 <b>${G.rejects} / 5</b> <small>5回で悪の勝利</small></span></div>${questContract()}</section>`;
 }
-function histRows(){return G.history.map(h=>`<tr><td>${ROMAN[h.q]}</td><td>${esc(P(h.leader).name)}：${h.team.map(t=>esc(P(t).name)).join('・')}<br><span class="muted">承認：${Object.keys(h.votes).filter(k=>h.votes[k]).map(k=>esc(P(+k).name)).join('・')||'なし'}</span></td><td style="text-align:right;white-space:nowrap">${h.approved?`<b class="gold">可決</b> ${h.yes}-${h.no}`:`<b class="evil">否決</b> ${h.yes}-${h.no}`}${h.success!=null?`<br>${h.success?'<b class="good">成功</b>':'<b class="evil">失敗</b>'}（失敗${h.fails}）`:''}</td></tr>`).join('')}
+function histRows(){return G.history.map(h=>`<tr><td>${ROMAN[h.q]}</td><td>${esc(P(h.leader).name)}：${h.team.map(t=>esc(P(t).name)).join('・')}<br><span class="muted">${h.voteMethod==='table'?'卓上投票／':'承認：'}${Object.keys(h.votes||{}).filter(k=>h.votes[k]).map(k=>esc(P(+k).name)).join('・')||(h.voteMethod==='table'?'結果のみ':'なし')}</span></td><td style="text-align:right;white-space:nowrap">${h.approved?'<b class="gold">承認</b>':'<b class="evil">却下</b>'}${h.voteMethod==='table'?'':` ${h.yes}-${h.no}`}${h.success!=null?`<br>${h.success?'<b class="good">成功</b>':'<b class="evil">失敗</b>'}（失敗${h.fails}）`:''}</td></tr>`).join('')}
 function logHTML(){
  if(!G.history.length)return '';
- return `<section class="plate hide-ls">${ORN}<div class="ph"><h3>${ic('scroll')} 年代記</h3><span class="eyebrow">Chronicle</span></div><ul class="log">${G.history.slice().reverse().slice(0,8).map(h=>`<li><span class="lq">${ROMAN[h.q]}</span><span>${esc(P(h.leader).name)} の提案［${h.team.map(t=>esc(P(t).name)).join('・')}］→ ${h.approved?`<b class="gold">可決</b> ${h.yes}-${h.no}`:`<b class="evil">否決</b> ${h.yes}-${h.no}`}${h.success!=null?`／${h.success?'<b class="good">成功</b>':'<b class="evil">失敗</b>'}（失敗${h.fails}枚）`:''}</span></li>`).join('')}</ul></section>`;
+ return `<section class="plate hide-ls">${ORN}<div class="ph"><h3>${ic('scroll')} 年代記</h3><span class="eyebrow">Chronicle</span></div><ul class="log">${G.history.slice().reverse().slice(0,8).map(h=>`<li><span class="lq">${ROMAN[h.q]}</span><span>${esc(P(h.leader).name)} の提案［${h.team.map(t=>esc(P(t).name)).join('・')}］→ ${h.approved?'<b class="gold">承認</b>':'<b class="evil">却下</b>'}${h.voteMethod==='table'?'':` ${h.yes}-${h.no}`}${h.success!=null?`／${h.success?'<b class="good">成功</b>':'<b class="evil">失敗</b>'}（失敗${h.fails}枚）`:''}</span></li>`).join('')}</ul></section>`;
 }
 function tile(i,o={}){
  const lead=G&&i===G.leader,lady=G&&G.opts.lady&&i===G.lady;const defaultName=/^プレイヤー(\d+)$/.exec(P(i).name);const printedName=defaultName?'<span class="default-player-name">プレイヤー<small>'+defaultName[1]+'</small></span>':nm(i);
@@ -1116,7 +1116,7 @@ function renderGame(st={}){
  if(!G)return;
  const viewKey=G.quest+':'+G.phase,previous=$('#app>.wrap.game');
  const scrollTop=previous?.dataset.viewKey===viewKey?previous.scrollTop:0;
- const sy=backTarget(),phaseLabel={ROLES:'役職確認',TEAM:'チーム編成',VOTE:'承認投票',VOTE_RESULT:'投票結果',QUEST:'探索',QUEST_RESULT:'探索結果',LADY:'湖の乙女',ASSASSIN:'暗殺'}[G.phase]||'';
+ const sy=backTarget(),phaseLabel={ROLES:'役職確認',TEAM:'チーム編成',VOTE:'承認投票',VOTE_REVEAL:'投票完了',VOTE_RESULT:'投票結果',QUEST:'探索',QUEST_REVEAL:'提出完了',QUEST_RESULT:'探索結果',LADY:'湖の乙女',ASSASSIN:'暗殺'}[G.phase]||'';
  $('#app').innerHTML=`<div class="wrap game"><div class="table-top"><span class="left"><button class="bkb game-back" id="backTop" type="button" aria-label="ひとつ前に戻る" ${sy?'':'disabled'}>${ic('back')}<span>戻る</span></button><span class="brand">AVALON</span><span class="edition">THE ROUND TABLE</span></span><span class="qpill">第 ${ROMAN[Math.min(G.quest,4)]} 探索 · ${N()}人</span><button class="iconbtn" id="menuBtn" aria-label="メニュー">${ic('menu')}</button></div>
  <div class="table-main"><div class="seat-area"><p class="crest-key">騎士の兜は参加者の目印です。役職とは関係ありません。</p><section class="players" style="--seat-columns:${N()<=5?N():N()<=6?3:N()<=8?4:5}" aria-label="円卓のプレイヤー">${seatRows(st)}</section></div>
  <div class="orderbar ${st.evil?'e':''}"><div class="eyebrow">${phaseLabel}</div><div class="st">${st.title||'次の場面へ進みます'}</div>${st.desc?`<div class="sd">${st.desc}</div>`:''}</div>
@@ -1158,70 +1158,36 @@ PH.TEAM=()=>new Promise(res=>{
    tile:i=>({pick:true,sel:G.team.includes(i)}),
    hint:`選択中 <b class="gold">${c}</b> / ${k}人`,
    dock:`<button class="btn btn-primary btn-lg" id="goVote" ${c!==k?'disabled':''}>${c===k?'このメンバーで投票へ':`あと${k-c}人選んでください`}</button>`,
-   setup:()=>{$('#goVote').onclick=async()=>{if(G.team.length!==k)return;sfx.tap();G.votes={};G.voteIdx=0;G.phase='VOTE';save();res()}}});
+   setup:()=>{$('#goVote').onclick=async()=>{if(G.team.length!==k)return;sfx.tap();G.votes={};G.voteOutcome=null;G.voteIdx=0;G.phase='VOTE';save();res()}}});
  };
  pickHandler=i=>{const t=G.team.indexOf(i);if(t>=0)G.team.splice(t,1);else if(G.team.length<k)G.team.push(i);else{toast(`選べるのは${k}人までです`);return}save();draw()};
  draw();
 });
-PH.VOTE=async()=>{G.opts.vote='open';G.voteIdx=Object.keys(G.votes).length;
- if(G.opts.vote==='secret'){
-  const ord=order(G.leader);
-  renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'秘密投票の最中です',desc:'順番に端末を回して、承認か却下を投票します。',tile:i=>({sel:G.team.includes(i)})});
-  while(G.voteIdx<N()){
-   const chosen=await SessionUI.pick({title:'投票する人',players:G.players.map((p,i)=>({id:i,name:p.name,icon:`<img src="${portrait(i)}" alt="">`,done:Object.hasOwn(G.votes,i),disabled:Object.hasOwn(G.votes,i)})),confirmIdentity:false,cancel:false});if(chosen==null){await new Promise(resolve=>renderGame({eye:'Preparation',title:'役職確認を一時中断しています',desc:'確認済みの役職は保持しています。',dock:'<button class="btn btn-primary btn-lg" id="resumeRoleList">役職一覧を開く</button>',setup:()=>{$('#resumeRoleList').onclick=resolve;}}));continue;}const i=Number(chosen);mark(`クエスト${ROMAN[G.quest]}：${P(i).name}さんの投票`);await passTo(i,`クエスト${ROMAN[G.quest]}のメンバー案に投票します。`);
-   G.votes[i]=await voteCard(i);G.voteIdx++;save();
-   closeGate();
-  }
-  closeGate();
- }else{
-  mark(`クエスト${ROMAN[G.quest]}：投票の入力`);
-  await new Promise(res=>{
-   const draw=()=>{const filled=Object.keys(G.votes).length;
-    renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'出陣の投票をまとめて入力',desc:'全員で承認・却下を示し、ここに記録してください。',
-     tile:i=>({sel:G.team.includes(i)}),
-     below:`<section class="group-vote-sheet" aria-label="出陣の投票">${G.players.map((p,i)=>`<div class="group-vote-row"><img src="${portrait(i)}" alt=""><span class="group-vote-name">${nm(i)}${G.team.includes(i)?'<small>探索隊</small>':''}</span><div class="ovote" role="group" aria-label="${nm(i)}の投票"><button type="button" class="y ${G.votes[i]===true?'on':''}" data-y="${i}" aria-pressed="${G.votes[i]===true}">承認</button><button type="button" class="n ${G.votes[i]===false?'on':''}" data-n="${i}" aria-pressed="${G.votes[i]===false}">却下</button></div></div>`).join('')}</section>`,
-     hint:`入力 <b class="gold">${filled}</b> / ${N()}人`,
-     dock:`<button class="btn btn-ghost" id="allY">全員承認</button><button class="btn btn-primary btn-lg" id="voteOk" ${filled<N()?'disabled':''}>${filled<N()?`集計する（${filled}/${N()}）`:'集計する'}</button>`,
-     setup:()=>{
-      $$('[data-y]').forEach(b=>b.onclick=e=>{e.stopPropagation();sfx.tap();G.votes[+b.dataset.y]=true;save();draw()});
-      $$('[data-n]').forEach(b=>b.onclick=e=>{e.stopPropagation();sfx.tap();G.votes[+b.dataset.n]=false;save();draw()});
-      $('#allY').onclick=()=>{G.players.forEach((_,i)=>{if(G.votes[i]===undefined)G.votes[i]=true});save();draw()};
-      $('#voteOk').onclick=()=>{if(Object.keys(G.votes).length<N())return;res()};
-     }});
-   };draw();
-  });
- }
- G.phase='VOTE_RESULT';
+PH.VOTE=async()=>{
+ mark(`クエスト${ROMAN[G.quest]}：卓上投票の結果入力`);
+ G.voteOutcome=await new Promise(resolve=>renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'メンバー案の投票結果',desc:'テーブルで投票し、最終結果だけ入力してください。',tile:i=>({sel:G.team.includes(i)}),below:`<div class="table-proposal">${G.team.map(i=>`<span>${avatar(i)}${nm(i)}</span>`).join('')}</div>`,dock:'<button class="btn btn-primary btn-lg" id="approveTeam">承認</button><button class="btn btn-danger btn-lg" id="rejectTeam">却下</button>',setup:()=>{$('#approveTeam').onclick=()=>resolve(true);$('#rejectTeam').onclick=()=>resolve(false)}}));
+ G.votes={};G.voteIdx=0;G.phase='VOTE_REVEAL';
 };
+async function tableRevealReady(kind){
+ await gateView(`<section class="table-result-ready"><div class="eyebrow">${kind==='quest'?'クエストの提出':'出陣の承認投票'}</div><h2>全員の投票が完了しました</h2><p>全員が見られる位置に端末を置いてください。</p><button class="btn btn-primary btn-lg" data-reveal-result>投票結果を見る</button></section>`,(box,done)=>{box.querySelector('[data-reveal-result]').onclick=()=>done(true)});
+ closeGate();
+}
+PH.VOTE_REVEAL=async()=>{await tableRevealReady('team');G.phase='VOTE_RESULT'};
+PH.QUEST_REVEAL=async()=>{await tableRevealReady('quest');G.phase='QUEST_RESULT'};
+
 function choiceSetup(g,done,guard){
  let v=null;const ok=g.querySelector('[data-ok]'),box=g.querySelector('.choices');
  g.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{if(b.disabled)return;sfx.flip();if(b.classList.contains('locked')){b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');return}v=b.dataset.v==='1';box.classList.add('picked');g.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b));ok.disabled=false});
  ok.onclick=()=>{if(v===null)return;if(guard&&!guard(v))return;sfx.tap();done(v)};
 }
-function voteCard(i){
- return gateView(`<div class="pass"><div class="eyebrow">Quest ${ROMAN[G.quest]} · Secret vote</div><h2 style="font-size:1.45rem;margin-top:4px">このメンバー案に投票</h2>
-  <p>リーダー <b class="gold">${nm(G.leader)}</b> の提案</p><div class="kl" style="justify-content:center;margin:4px 0">${G.team.map(t=>`<span class="kp p">${avatar(t)}${nm(t)}</span>`).join('')}</div>
-  ${G.rejects===4?'<p class="evil" style="margin-top:6px"><b>否決されると悪の陣営の勝利です。</b></p>':''}
-  <div class="choices"><button class="cc y" data-v="1" aria-label="承認">${qface('y')}</button><button class="cc n" data-v="0" aria-label="却下">${qface('n')}</button></div>
-  <button class="btn btn-primary btn-lg btn-full" data-ok disabled>この票を投じる</button></div>`,(g,done)=>choiceSetup(g,done));
-}
 PH.VOTE_RESULT=async()=>{
- const ord=order(G.leader),yes=ord.filter(i=>G.votes[i]).length,no=N()-yes,ok=yes>no,next=(G.leader+1)%N();
- renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'投票を公開します',tile:i=>({sel:G.team.includes(i)})});
- await modal(`<div class="ctr reveal-band"><div class="eyebrow">Quest ${ROMAN[G.quest]} · Vote result</div><h2 style="margin-top:4px">投票を公開します</h2><p>提案：${G.team.map(t=>nm(t)).join('・')}</p></div>
-  <div class="vgrid">${ord.map(i=>`<div class="vg ${i===G.leader?'lead':''}"><div class="fl"><div class="fl-in">${cardBack()}${qface(G.votes[i]?'y':'n','fc front mini')}</div></div><span class="nm">${nm(i)}</span></div>`).join('')}</div>
-  <div class="verdict"><div class="banner ${ok?'y':'n'}"><span class="cnt">承認<big>${yes}</big>—<big>${no}</big>却下</span><b class="${ok?'gt':'evil'}">${ok?'可決':'否決'}</b><span class="note">${ok?'メンバーはクエストへ出発します':G.rejects+1>=5?'5回連続の否決…':`リーダーは ${nm(next)} さんへ移ります`}</span></div></div>
-  <div class="acts"><button class="btn btn-primary btn-lg" data-ok disabled>次へ</button></div>`,async(b,close)=>{
-   await wait(700);b.querySelectorAll('.vg .fl').forEach(f=>f.classList.add('on'));sfx.flip();
-   await wait(1000);b.querySelector('h2').textContent='投票結果';b.querySelector('.verdict').classList.add('show');ok?sfx.good():sfx.bad();
-   const btn=b.querySelector('[data-ok]');btn.disabled=false;btn.onclick=()=>close(true);
-  },{wide:true});
- G.history.push({q:G.quest,leader:G.leader,team:G.team.slice(),yes,no,approved:ok,votes:{...G.votes}});
- if(ok){G.rejects=0;G.qcards=[];G.questIdx=0;G.phase='QUEST'}
- else{G.rejects++;
-  if(G.rejects>=5){endGame('evil','5回連続でメンバー案が否決されました。')}
-  else{G.leader=next;G.team=[];G.phase='TEAM';renderGame({});const s=$('#sk'+(G.rejects-1));if(s){s.classList.add('pop');sfx.gem()}}}
+ const ok=typeof G.voteOutcome==='boolean'?G.voteOutcome:Object.values(G.votes||{}).filter(Boolean).length>N()/2,next=(G.leader+1)%N();
+ renderGame({icon:'vote',eye:`Quest ${ROMAN[G.quest]} · Vote`,title:'出陣の投票結果',tile:i=>({sel:G.team.includes(i)})});
+ await modal(`<section class="table-vote-result"><div class="eyebrow">出陣の投票結果</div><h2 class="${ok?'good':'evil'}">${ok?'承認されました':'却下されました'}</h2><p>${ok?'このメンバーでクエストに出発します。':G.rejects+1>=5?'5回連続の否決となりました。':`次のリーダーは ${nm(next)} さんです。`}</p><div class="acts"><button class="btn btn-primary btn-lg" data-ok>次へ</button></div></section>`,(box,close)=>{box.querySelector('[data-ok]').onclick=()=>close(true)});
+ G.history.push({q:G.quest,leader:G.leader,team:G.team.slice(),approved:ok,voteMethod:'table'});
+ if(ok){G.rejects=0;G.qcards=[];G.questIdx=0;G.phase='QUEST'}else{G.rejects++;if(G.rejects>=5)endGame('evil','5回連続でメンバー案が否決されました。');else{G.leader=next;G.team=[];G.phase='TEAM';renderGame({})}}
 };
+
 PH.QUEST=async()=>{
  renderGame({icon:'sword',eye:`Quest ${ROMAN[G.quest]} · Mission`,title:`クエスト${ROMAN[G.quest]}へ出発！`,desc:'メンバーに順番に端末を回し、成功か失敗のカードを出してもらいます。',tile:i=>({sel:G.team.includes(i),dim:!G.team.includes(i)})});
  while(G.questIdx<G.team.length){
@@ -1229,7 +1195,7 @@ PH.QUEST=async()=>{
   G.qcards.push(await questCard(i));G.questIdx++;save();
   if(G.questIdx<G.team.length)await hideAndPass(`次は <b class="gold">${nm(G.team[G.questIdx])}</b> さんに渡してください。`);
  }
- closeGate();G.phase='QUEST_RESULT';
+ closeGate();G.phase='QUEST_REVEAL';
 };
 function questCard(i){
  const good=side(P(i))==='good';
@@ -1385,7 +1351,7 @@ function helpHTML(tab){
  const T={
   flow:`<h3>勝利条件</h3><p>善の陣営はクエストを<b>3回成功</b>させれば勝利（ただし最後にアサシンがマーリンを当てると逆転負け）。悪の陣営はクエストを<b>3回失敗</b>させるか、メンバー案を<b>5回連続で否決</b>させれば勝利。</p>
    <h3>1ラウンドの流れ</h3><ol><li><b>チーム編成</b>：リーダーがクエストのメンバーを決められた人数だけ選びます。</li><li><b>投票</b>：全員でそのメンバー案を承認するか却下するか投票。過半数の承認で可決（同数は否決）。否決ならリーダーが次の人へ。</li><li><b>クエスト</b>：メンバーは秘密で「成功」か「失敗」のカードを出します。善の陣営は必ず成功。失敗が1枚でもあればクエスト失敗（7人以上の第4クエストは2枚必要）。</li><li><b>湖の乙女</b>（オプション）：第2〜4クエストの後、乙女を持つ人が1人の陣営を確認し、乙女はその人へ移ります。</li></ol>
-   <h3>1台で遊ぶコツ</h3><ul><li>秘密の操作の前には「端末を○○さんへ」と表示されます。本人以外は見ないでください。</li><li>出陣は全員の承認・却下をまとめて入力。探索の成功・失敗は、選ばれた本人が秘密で提出します。</li><li>メニューからいつでも自分の役職を確認できます。</li></ul>`,
+   <h3>1台で遊ぶコツ</h3><ul><li>秘密の操作の前には「端末を○○さんへ」と表示されます。本人以外は見ないでください。</li><li>出陣の投票はテーブルで行い、最終結果だけ入力。探索の成功・失敗は、選ばれた本人が秘密で提出します。</li><li>メニューからいつでも自分の役職を確認できます。</li></ul>`,
   roles:Object.keys(ROLES).map(k=>{const R=ROLES[k];return `<div class="rl"><img src="${ART[R.art]}" alt=""><div><b class="${R.side==='good'?'good':'evil'}">${R.name}</b> <span class="note">${R.side==='good'?'善':'悪'}</span><p>${R.desc}</p><p class="note">${R.goal}</p></div></div>`}).join(''),
   table:`<h3>クエストの人数</h3><table class="qtable"><tr><th>人数</th>${qs.map(n=>`<th>${n}</th>`).join('')}</tr><tr><td>善／悪</td>${qs.map(n=>`<td>${n-EVILN[n]}/${EVILN[n]}</td>`).join('')}</tr>${[0,1,2,3,4].map(q=>`<tr><td>${ROMAN[q]}</td>${qs.map(n=>`<td>${QSIZE[n][q]}${needFails(n,q)>1?'*':''}</td>`).join('')}</tr>`).join('')}</table><p class="note" style="margin-top:8px">* 失敗カード2枚で失敗</p>`
  };
@@ -1419,7 +1385,7 @@ function renderLobby(){
    <div class="teamsum"><div class="ts g"><img src="${CREST.g}" alt=""><b>${gN}<small>人</small></b><span class="k">善の陣営</span><span class="who">${gl}</span></div><div class="ts e"><img src="${CREST.e}" alt=""><b>${eN}<small>人</small></b><span class="k">悪の陣営</span><span class="who">${el}</span></div></div>
    ${L.roles.includes('MORGANA')&&!L.roles.includes('PERCIVAL')?'<p class="note" style="margin-top:10px;color:#ffb4aa">モルガナはパーシヴァルがいるときに効果を発揮します。</p>':''}</section>
   <section class="plate">${ORN}<div class="optrow"><div><div class="t">${ic('lady')} 湖の乙女</div><div class="d">第2〜4クエストの後に1人の陣営を確認できる（7人以上におすすめ）</div></div><button class="tg ${L.lady?'on':''}" id="lady" aria-label="湖の乙女" aria-pressed="${L.lady}"></button></div>
-   <div class="optrow"><div><div class="t">投票</div><div class="d">出陣の承認・却下は全員分をまとめて入力。探索の成功・失敗は本人だけが提出します。</div></div></div>
+   <div class="optrow"><div><div class="t">投票</div><div class="d">出陣は承認・却下の結果だけ入力。探索の成功・失敗は本人だけが提出します。</div></div></div>
   </div><div class="lobby-foot"><button class="linkbtn" id="rules">${ic('book')} 遊び方と役職</button><button class="linkbtn" data-sound aria-pressed="${!muted}">${muted?'音：OFF':'音：ON'}</button></div>
  </div><div class="dock"><div class="dock-in"><button class="btn btn-primary btn-lg" id="start">${n}人で円卓につく</button></div></div>`;
  $('#app>.wrap.lobby').scrollTop=scrollTop;
@@ -1932,5 +1898,19 @@ html body #sheet:has(.assflip)>.acts button{min-height:44px!important;width:100%
 @media(orientation:landscape) and (max-height:450px){html body #sheet:has(.assflip){display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;gap:12px 24px!important}html body #sheet:has(.assflip)>.ctr{grid-column:1!important;grid-row:1!important}html body #sheet .assflip{grid-column:2!important;grid-row:1/4!important;justify-self:center!important;width:auto!important}html body #sheet:has(.assflip)>.verdict{grid-column:1!important;grid-row:2!important}html body #sheet:has(.assflip)>.acts{grid-column:1!important;grid-row:3!important}}
 @media(max-width:340px){html body .end-quest-results{gap:8px!important}html body .end-quest-mark{width:40px!important;height:40px!important}html body .end-quest-mark img{width:36px!important;height:36px!important}html body .end-quest-results li{grid-template-rows:20px 40px 24px!important}html body .end-quest-status{font-size:12px!important}}
 @media(prefers-reduced-motion:reduce){html body #sheet .assflip .fl-in{transition:none!important}}
-</style><style id="portrait-radius-v18">html body .art-person,html body .portrait-choice,html body .session-face,html body .session-face img,html body .lobby-icon,html body img.player-icon{border-radius:6px!important}html body .portrait-choice,html body .session-face{overflow:hidden!important}</style></body>
+</style><style id="portrait-radius-v18">html body .art-person,html body .portrait-choice,html body .session-face,html body .session-face img,html body .lobby-icon,html body img.player-icon{border-radius:6px!important}html body .portrait-choice,html body .session-face{overflow:hidden!important}</style><style id="tabletop-ux-v20">@layer tabletopFinish{
+ html body #gate:has(.table-result-ready) .gate-in{display:grid!important;place-items:center!important;min-height:0!important;height:100%!important;padding:16px!important;box-sizing:border-box!important;overflow:visible!important}
+ html body .table-result-ready{display:grid!important;gap:16px!important;justify-items:center!important;align-content:center!important;text-align:center!important;width:min(100%,640px)!important;min-height:0!important}
+ html body .table-result-ready h2{font-size:clamp(20px,4vw,30px)!important;line-height:1.5!important;margin:0!important}
+ html body .table-result-ready p{font-size:14px!important;line-height:1.6!important;margin:0!important}
+ html body .table-result-ready button{min-height:48px!important;width:min(100%,360px)!important;margin:0!important}
+ html body .table-proposal{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+ html body .table-proposal>span{display:flex;align-items:center;gap:8px}
+ html body .table-proposal .art-person{width:32px;height:40px}
+ html body .table-vote-result{text-align:center!important;display:grid;gap:16px}
+ html body .table-vote-result h2{margin:0;font-size:28px;line-height:1.4}
+ html body #approveTeam,html body #rejectTeam{flex:1;min-height:48px!important}
+ html body #rejectTeam{background:#793f40!important;color:#fff0e4!important;border-color:#a56868!important}
+}
+</style></body>
 </html>
