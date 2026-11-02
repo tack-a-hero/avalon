@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><style id="refinement-v23">@layer centralBallotV23{
+<head><style id="separated-controls-v25">@layer separatedControlsV25{
+ html body .world-actions{gap:8px!important}
+ html body :is(button.btn,button.tool,.session-dialog button,.session-cover button){border-radius:6px!important}
+html body .rolepick{gap:16px!important}html body .rolepick :is(.rp,.art){transform:none!important;rotate:none!important;translate:none!important}html body .rolepick .rp{margin:0!important}
+}</style><style id="refinement-v23">@layer centralBallotV23{
  html body #app>.game:has(.team-ballot-view){position:relative!important;display:flex!important;flex-direction:column!important;min-height:0!important;height:var(--app-view-h,calc(100svh - 56px))!important;padding:16px!important;box-sizing:border-box!important;overflow:auto!important}
  html body .game:has(.team-ballot-view) :is(.seat-area,.board-area,.table-links){display:none!important}
  html body .game:has(.team-ballot-view) .table-main{display:flex!important;flex-direction:column!important;flex:1!important;min-height:0!important;width:100%!important;margin:0!important;padding:0!important;gap:12px!important}
